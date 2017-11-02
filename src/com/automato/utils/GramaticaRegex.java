@@ -11,15 +11,9 @@ package com.automato.utils;
  * @author Francisco
  */
 public final class GramaticaRegex {
-    public static String INICIAL = "[A-Z]";    
-    
-    public static String N_TERMINAIS = "([A-Z],)*|([A-Z],)*[A-Z]";
-    
-    public static String TERMINAIS = "([a-z],)*|([a-z],)*[a-z]";
-   
     public static String PRODUCOES = "([A-Z])|"
                                     + "([A-Z]=)|"
-                                    + "([A-Z]=[a-z][A-Z]*)|"
-                                    + "([A-Z]=([a-z][A-Z]*[|])*)|"    
-                                    + "(([A-Z]=([a-z][A-Z]*[|])*[a-z][A-Z]*)\n?)*";                                       
+                                    + "([A-Z]=[a-z][A-Z]?)|"
+                                    + "([A-Z]=([a-z][A-Z]?[|])*)|"    
+                                    + "(([A-Z]=([a-z][A-Z]?[|])*(([&]?)|([a-z][A-Z]?)))\n?)*";                                       
 }
