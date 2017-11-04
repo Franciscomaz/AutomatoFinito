@@ -5,9 +5,9 @@
  */
 package com.automato.views;
 import com.automato.listener.GramaticaListener;
-import static com.automato.utils.GramaticaRegex.PRODUCOES;
 import com.automato.utils.CustomDocumentFilter;
 import javax.swing.text.AbstractDocument;
+import static com.automato.utils.GramaticaRegex.GRAMATICA;
 /**
  *
  * @author Francisco
@@ -53,7 +53,7 @@ public class TelaGramatica extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(producoesTextArea);
         AbstractDocument document = (AbstractDocument) producoesTextArea.getDocument();
-        document.setDocumentFilter(new CustomDocumentFilter(PRODUCOES));
+        document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
 
         jLabel6.setText("Gramática:");
 
@@ -114,7 +114,12 @@ public class TelaGramatica extends javax.swing.JPanel {
     private void producoesTextAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_producoesTextAreaFocusLost
         producoesTextArea.setText(removeLastCharacter('|', producoesTextArea.getText()));
     }//GEN-LAST:event_producoesTextAreaFocusLost
+    
+    public String getGramatica(){     
+        return producoesTextArea.getText();
+    }
 
+//verifica se o character enviado existe no final da string, removendo-o caso ele exista
     public String removeLastCharacter(char character, String text) {
         int length = text.length() - 1;
 

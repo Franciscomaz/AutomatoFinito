@@ -35,7 +35,7 @@ public class AutomatoListener implements ActionListener {
                 break;
         }
     }
-
+    
     public void voltar() {
         TelaPrincipal tp = (TelaPrincipal) SwingUtilities.getWindowAncestor(telaAutomato);
         getComponent(tp);

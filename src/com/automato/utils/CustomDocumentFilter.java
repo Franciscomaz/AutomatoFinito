@@ -16,11 +16,11 @@ import javax.swing.text.DocumentFilter;
  */
 public class CustomDocumentFilter extends DocumentFilter {
     private final String filter;
-    
+    //recebe o regex que sera usado como filtro
     public CustomDocumentFilter(String filter){
         this.filter = filter;
     }
-    
+    //le o input do usuário e verifica se faz parte do regex recebido
     @Override
     public void replace(FilterBypass fb, int offs, int length,
         String str, AttributeSet a) throws BadLocationException {
