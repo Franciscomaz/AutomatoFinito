@@ -5,8 +5,6 @@
  */
 package com.automato.views;
 
-import java.awt.BorderLayout;
-import java.awt.CardLayout;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -21,16 +19,11 @@ public final class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-       
-        initTelaGramatica();
-        
+        initTelaGramatica();    
     }
     
     public void initTelaGramatica(){       
-        TelaGramatica tg = new TelaGramatica();
-        tg.setName("Tela Gramatica");
-        this.add(tg);
-        
+        this.add(new TelaGramatica());       
         this.pack();
     }
 
@@ -85,10 +78,6 @@ public final class TelaPrincipal extends javax.swing.JFrame {
             } catch (UnsupportedLookAndFeelException | ClassNotFoundException | InstantiationException | IllegalAccessException e) {
                 // handle exception
             }
-            // handle exception
-            // handle exception
-            // handle exception
-
             new TelaPrincipal().setVisible(true); //Create and show the GUI.
         });
     }

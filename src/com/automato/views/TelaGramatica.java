@@ -8,6 +8,7 @@ import com.automato.listener.GramaticaListener;
 import com.automato.utils.CustomDocumentFilter;
 import javax.swing.text.AbstractDocument;
 import static com.automato.utils.GramaticaRegex.GRAMATICA;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Francisco
@@ -32,7 +33,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         buttonEnviar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        producoesTextArea = new javax.swing.JTextArea();
+        gramaticaTextArea = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -44,15 +45,11 @@ public class TelaGramatica extends javax.swing.JPanel {
         buttonEnviar.setText("Enviar");
         buttonEnviar.addActionListener(l);
 
-        producoesTextArea.setColumns(20);
-        producoesTextArea.setRows(5);
-        producoesTextArea.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                producoesTextAreaFocusLost(evt);
-            }
-        });
-        jScrollPane1.setViewportView(producoesTextArea);
-        AbstractDocument document = (AbstractDocument) producoesTextArea.getDocument();
+        gramaticaTextArea.setColumns(20);
+        gramaticaTextArea.setRows(5);
+        gramaticaTextArea.setText("A=aA|bB\nB=cC|dD");
+        jScrollPane1.setViewportView(gramaticaTextArea);
+        AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
 
         jLabel6.setText("Gramática:");
@@ -110,34 +107,46 @@ public class TelaGramatica extends javax.swing.JPanel {
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
-
-    private void producoesTextAreaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_producoesTextAreaFocusLost
-        producoesTextArea.setText(removeLastCharacter('|', producoesTextArea.getText()));
-    }//GEN-LAST:event_producoesTextAreaFocusLost
     
     public String getGramatica(){     
-        return producoesTextArea.getText();
-    }
-
-//verifica se o character enviado existe no final da string, removendo-o caso ele exista
-    public String removeLastCharacter(char character, String text) {
-        int length = text.length() - 1;
-
-        if (length != -1 && text.charAt(length) == character) {
-            text = text.substring(0, length);
+        limpaGramatica();
+        
+        try {
+            validaGramatica();
+            return gramaticaTextArea.getText();
+        } catch (AutomatoException ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage());
         }
-
-        return text;
+        
+        return null;
     }
-
+    
+    public void validaGramatica() throws AutomatoException{
+        String gramatica = gramaticaTextArea.getText();
+        
+        if(gramatica.equals("")){
+            throw new AutomatoException("Insira uma gramática válida.");
+        }
+    }
+    //para quando tiver so o nao terminal e o = em uma linha
+    public void limpaGramatica(){
+        String gramatica = gramaticaTextArea.getText();
+        
+        int index = gramatica.lastIndexOf("\n");
+        
+        if(gramatica.substring(index+1).length() < 3){
+           gramaticaTextArea.setText(gramatica.substring(0,index+1));
+       }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonEnviar;
+    private javax.swing.JTextArea gramaticaTextArea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea producoesTextArea;
     // End of variables declaration//GEN-END:variables
 }

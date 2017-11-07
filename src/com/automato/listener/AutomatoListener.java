@@ -38,23 +38,18 @@ public class AutomatoListener implements ActionListener {
     
     public void voltar() {
         TelaPrincipal tp = (TelaPrincipal) SwingUtilities.getWindowAncestor(telaAutomato);
+        tp.remove(telaAutomato);
         getComponent(tp);
-        //tp.remove(telaAutomato);      
-        tp.pack();
     }
     
-    public void getComponent(TelaPrincipal tp){
-        
+    public void getComponent(TelaPrincipal tp){       
         for (Component c : tp.getContentPane().getComponents()){
             if(c instanceof TelaGramatica){             
                 c.setVisible(true);
-                c.setFocusable(true);
-                telaAutomato.setVisible(false);
-                System.out.println("funciona");
+                tp.add(c);
                 return;
-            }
-        
+            }        
         }  
     }
-
+    
 }

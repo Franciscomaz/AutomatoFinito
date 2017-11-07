@@ -12,9 +12,8 @@ package com.automato.utils;
  */
 public final class GramaticaRegex {
 
-    public static String GRAMATICA = "([A-Z])|"
-                                    + "([A-Z]=)|"
+    public static String GRAMATICA = "([A-Z]=?)|"
                                     + "([A-Z]=[a-z][A-Z]?)|"
                                     + "([A-Z]=([a-z][A-Z]?[|])*)|"    
-                                    + "(([A-Z]=([a-z][A-Z]?[|])*(([&])|([a-z][A-Z]?)))\n?)*";                                       
+                                    + "(([A-Z]=([a-z][A-Z]?[|])*([&]|([a-z][A-Z]?)))\n?)*";                                       
 }

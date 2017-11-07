@@ -68,7 +68,7 @@ public class Gramatica {
         return Arrays.asList(gramatica.split("\n"));
     }
     //retorna as produções
-    private List<String> getProducoes(){
+    public List<String> getProducoes(){
         return getLinhas()//recebe as linhas
                 .stream()//pega uma linha por vez
                 .map(s->s.substring(2))//elimina os dois primeiros caráracteres de cada linha(não-terminal e =)

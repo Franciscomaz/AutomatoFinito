@@ -90,16 +90,14 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTextArea" name="producoesTextArea">
+        <Component class="javax.swing.JTextArea" name="gramaticaTextArea">
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="A=aA|bB&#xa;B=cC|dD"/>
           </Properties>
-          <Events>
-            <EventHandler event="focusLost" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="producoesTextAreaFocusLost"/>
-          </Events>
           <AuxValues>
-            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AbstractDocument document = (AbstractDocument) producoesTextArea.getDocument();&#xa;        document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));"/>
+            <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();&#xa;        document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));"/>
           </AuxValues>
         </Component>
       </SubComponents>
