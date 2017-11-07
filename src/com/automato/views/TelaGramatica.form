@@ -28,7 +28,7 @@
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                       <Component id="buttonEnviar" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <Component id="jScrollPane1" alignment="0" pref="376" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" alignment="0" pref="380" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
@@ -94,7 +94,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="A=aB|bA&#xa;B=aC|bA&#xa;C=aC|bD|b&#xa;D=aD|a|bD|b"/>
+            <Property name="text" type="java.lang.String" value="A=aB|a|bC|b&#xa;B=aD|a|bC|b&#xa;C=aE|a|bC|b&#xa;D=aD|a|bC|b&#xa;E=&amp;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();&#xa;        document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));"/>

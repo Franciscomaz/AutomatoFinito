@@ -6,9 +6,7 @@
 package com.automato.gramatica;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -37,6 +35,7 @@ public class Gramatica {
                 .stream()
                 .map(s->getProducoes(s))
                 .flatMap(List::stream)
+                .filter(s->!s.equalsIgnoreCase("&"))
                 .map(s->s.substring(0, 1))
                 .collect(Collectors.toSet());               
     }

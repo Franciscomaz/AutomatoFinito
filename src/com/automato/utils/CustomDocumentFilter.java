@@ -26,7 +26,6 @@ public class CustomDocumentFilter extends DocumentFilter {
     //le o input do usuário e verifica se faz parte do regex recebido
     @Override
     public void replace(FilterBypass fb, int offs, int length, String str, AttributeSet a) throws BadLocationException {
-
         String text = fb.getDocument().getText(0, fb.getDocument().getLength());
 
         text = text.substring(text.lastIndexOf("\n") + 1, text.length()) + str;

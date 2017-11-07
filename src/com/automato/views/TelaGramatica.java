@@ -47,7 +47,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         gramaticaTextArea.setColumns(20);
         gramaticaTextArea.setRows(5);
-        gramaticaTextArea.setText("A=aB|bA\nB=aC|bA\nC=aC|bD|b\nD=aD|a|bD|b");
+        gramaticaTextArea.setText("A=aB|a|bC|b\nB=aD|a|bC|b\nC=aE|a|bC|b\nD=aD|a|bC|b\nE=&");
         jScrollPane1.setViewportView(gramaticaTextArea);
         AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
@@ -72,7 +72,7 @@ public class TelaGramatica extends javax.swing.JPanel {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(buttonEnviar))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 380, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()

@@ -26,7 +26,7 @@ public class AutomatoFinito {
 
     public DefaultTableModel getTabela() {
         List<String> titulo = new ArrayList<>();
-
+        
         titulo.addAll(gramatica.getTerminais());
         titulo.add(0, "Não terminais");
 
@@ -42,22 +42,23 @@ public class AutomatoFinito {
         List<String> linhas = gramatica.getLinhas();
 
         String[][] matriz = new String[nTerminais.size()][terminais.size() + 1];
-
+        
         for (int i = 0; i < nTerminais.size(); i++) {
             matriz[i][0] = verificaEstado(nTerminais.get(i));
             for (int j = 1; j < terminais.size() + 1; j++) {
-                for (String producao : gramatica.getProducoes(linhas.get(i))) {
+                for (String producao : gramatica.getProducoes(linhas.get(i))) {                   
                     if (producao.length() > 1 && producao.contains(terminais.get(j - 1))) {
-                        matriz[i][j] = producao.substring(1);
+                        if(matriz[i][j]==null)
+                            matriz[i][j] = "";
+                        if(matriz[i][j].length() > 0)
+                            matriz[i][j]+=",";                    
+                        matriz[i][j] += producao.substring(1);
                     }
                 }
             }
         }
-
         return matriz;
     }
-
-    
     
     private String verificaEstado(String nTerminal) {
         String estado = "";
@@ -74,8 +75,8 @@ public class AutomatoFinito {
     }
 
     public Set<String> getFinais() {
-        //ArrayList pegaFinal = new ArrayList<>();
         HashSet<String> pegaFinal = new HashSet<>();
+        
         for (String linha : gramatica.getLinhas()) {
             //Converte a linha em char
             List<String> producoes = gramatica.getProducoes(linha);
@@ -85,16 +86,15 @@ public class AutomatoFinito {
                 if (producao.length() < 2) {
                     if (linha.contains(producao)) {
                         for (String verificaFinal : producoes) {
-                            if (verificaFinal.contains(producao) && verificaFinal.length() > 1) {
-                                pegaFinal.add(verificaFinal.substring(1));
-                            }
+                            if(producao.equals("&"))
+                                pegaFinal.add(linha.substring(0,1));
+                            if (verificaFinal.contains(producao) && verificaFinal.length() > 1) 
+                                pegaFinal.add(verificaFinal.substring(1));                            
                         }
                     }
                 }
             }
         }
-        System.out.println("Final detectado: " + pegaFinal);
-
         return pegaFinal;
     }
 
