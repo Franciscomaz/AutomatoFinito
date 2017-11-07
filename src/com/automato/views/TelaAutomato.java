@@ -5,21 +5,30 @@
  */
 package com.automato.views;
 
+import com.automato.automatofinito.AutomatoFinito;
 import com.automato.listener.AutomatoListener;
 
 /**
  *
  * @author Francisco
  */
-public class TelaAutomato extends javax.swing.JPanel {
+public final class TelaAutomato extends javax.swing.JPanel {
+
     private final AutomatoListener l = new AutomatoListener(this);
+    private final AutomatoFinito automato;
+
     /**
      * Creates new form TelaAutomato
+     *
+     * @param automato
      */
-    public TelaAutomato() {
+    public TelaAutomato(AutomatoFinito automato) {
         initComponents();
+        this.automato = automato;
+        tabelaAutomato.setModel(automato.getTabela());
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,7 +39,7 @@ public class TelaAutomato extends javax.swing.JPanel {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        tebelaAutomato = new javax.swing.JTable();
+        tabelaAutomato = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         fieldSentenca = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
@@ -40,7 +49,7 @@ public class TelaAutomato extends javax.swing.JPanel {
         setMinimumSize(new java.awt.Dimension(400, 528));
         setPreferredSize(new java.awt.Dimension(400, 528));
 
-        tebelaAutomato.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaAutomato.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -51,7 +60,7 @@ public class TelaAutomato extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(tebelaAutomato);
+        jScrollPane1.setViewportView(tabelaAutomato);
 
         jLabel1.setText("Sentença:");
 
@@ -108,6 +117,6 @@ public class TelaAutomato extends javax.swing.JPanel {
     private javax.swing.JTextField fieldSentenca;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tebelaAutomato;
+    private javax.swing.JTable tabelaAutomato;
     // End of variables declaration//GEN-END:variables
 }

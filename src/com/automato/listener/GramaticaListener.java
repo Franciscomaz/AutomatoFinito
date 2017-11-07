@@ -5,6 +5,7 @@
  */
 package com.automato.listener;
 
+import com.automato.automatofinito.AutomatoFinito;
 import com.automato.gramatica.Gramatica;
 import com.automato.views.TelaAutomato;
 import com.automato.views.TelaGramatica;
@@ -42,7 +43,7 @@ public class GramaticaListener implements ActionListener{
         
         TelaPrincipal tp = (TelaPrincipal)SwingUtilities.getWindowAncestor(telaGramatica);
         telaGramatica.setVisible(false);
-        tp.add(new TelaAutomato());
+        tp.add(new TelaAutomato(new AutomatoFinito(new Gramatica(gramatica))));
         test(gramatica);
     }
      

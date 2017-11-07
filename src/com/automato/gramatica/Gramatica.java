@@ -6,6 +6,7 @@
 package com.automato.gramatica;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -32,10 +33,12 @@ public class Gramatica {
     }
     //retorn os terminais
     public Set<String> getTerminais(){
-        return getProducoes()//recebe as produções
-                .stream()//pega uma produção por vez
-                .map(s -> s.substring(0, 1))//pega o primeiro carácter de cada produção
-                .collect(Collectors.toSet());//passa cada carácter para um set      
+        return getLinhas()
+                .stream()
+                .map(s->getProducoes(s))
+                .flatMap(List::stream)
+                .map(s->s.substring(0, 1))
+                .collect(Collectors.toSet());               
     }
   //retorna os não terminais
     public Set<String> getNaoTerminais(){
@@ -44,37 +47,14 @@ public class Gramatica {
                 .map(linha -> linha.substring(0, 1))//pega o primeiro carácter de cada linha
                 .collect(Collectors.toSet());//passa cada carácter para um set
     }
-    //retorna as transições
-    public HashMap<Character, List> getTransicoes(){
-        // hash criado para conseguir pegar o Não terminal como key
-        // e todo restante como seu valor.
-        HashMap<Character, List> gramaticaHash = new HashMap<>();
-        //Linha abaixo criado para conseguir armazenar cada linha
-        //apos o enter dado
-        //Laço for criado para tratar a quantidade de linha
-        for (String linha : getLinhas()) {
-            //Transforma a primeira linha toda em char para comparacao
-            char nTerminal = linha.charAt(0); // 1 opcao dentro
-            //Elimina os dois primeiros carácteres da linha e passa para uma string
-            List valorHash = Arrays.asList(linha.substring(2).split("[|]"));
-            //chama o hash map para inserir sua key e seus valores
-            gramaticaHash.put(nTerminal, valorHash);
-        }
 
-        return gramaticaHash;
-    }
     //faz um array de strings à cada \n e depois passa para uma lista
     public List<String> getLinhas(){
         return Arrays.asList(gramatica.split("\n"));
     }
     //retorna as produções
-    public List<String> getProducoes(){
-        return getLinhas()//recebe as linhas
-                .stream()//pega uma linha por vez
-                .map(s->s.substring(2))//elimina os dois primeiros caráracteres de cada linha(não-terminal e =)
-                .map(s->s.split("[|]"))//divide as produções
-                .flatMap(Arrays::stream)//pega uma produção por vez
-                .collect(Collectors.toList());//passa cada produção para uma lista
+    public List<String> getProducoes(String linha){
+        return Arrays.asList(linha.substring(2).split("[|]"));
     }
     
 }

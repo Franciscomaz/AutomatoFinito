@@ -47,7 +47,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         gramaticaTextArea.setColumns(20);
         gramaticaTextArea.setRows(5);
-        gramaticaTextArea.setText("A=aA|bB\nB=cC|dD");
+        gramaticaTextArea.setText("A=aB|bA\nB=aC|bA\nC=aC|bD|b\nD=aD|a|bD|b");
         jScrollPane1.setViewportView(gramaticaTextArea);
         AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
@@ -128,7 +128,7 @@ public class TelaGramatica extends javax.swing.JPanel {
             throw new AutomatoException("Insira uma gramática válida.");
         }
     }
-    //para quando tiver so o nao terminal e o = em uma linha
+    //para quando tiver so o nao terminal e o "=" em uma linha
     public void limpaGramatica(){
         String gramatica = gramaticaTextArea.getText();
         
