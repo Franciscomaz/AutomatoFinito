@@ -7,6 +7,7 @@ package com.automato.gramatica;
 
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -46,7 +47,17 @@ public class Gramatica {
                 .map(linha -> linha.substring(0, 1))//pega o primeiro carácter de cada linha
                 .collect(Collectors.toSet());//passa cada carácter para um set
     }
-
+    
+    public HashMap<String, List<String>> getTransicoes(){
+        HashMap<String, List<String>> transicoes = new HashMap<>();
+        
+        for(String linha : getLinhas()){
+            transicoes.put(linha.substring(0), getProducoes(linha));
+        }
+        
+        return transicoes;
+    }
+    
     //faz um array de strings à cada \n e depois passa para uma lista
     public List<String> getLinhas(){
         return Arrays.asList(gramatica.split("\n"));
