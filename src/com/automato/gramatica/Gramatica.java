@@ -52,7 +52,7 @@ public class Gramatica {
         HashMap<String, List<String>> transicoes = new HashMap<>();
         
         for(String linha : getLinhas()){
-            transicoes.put(linha.substring(0), getProducoes(linha));
+            transicoes.put(linha.substring(0,1), getProducoes(linha));
         }
         
         return transicoes;

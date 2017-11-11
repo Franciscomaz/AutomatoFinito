@@ -14,6 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -47,8 +48,18 @@ public class AutomatoListener implements ActionListener {
         for(int i = 0; i < sentenca.length(); i++){
             fita.add(sentenca.substring(i,i+1));
         }
+        boolean sentencaReconhecida = false;
+        try{
+             sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
+        } catch(NullPointerException ex){
+            
+        }
         
-        telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
+        if(sentencaReconhecida){
+            JOptionPane.showMessageDialog(telaAutomato, "Sentença reconhecida.");
+        } else {
+            JOptionPane.showMessageDialog(telaAutomato, "Sentença invalida.");
+        }
     }
     
     public void voltar() {

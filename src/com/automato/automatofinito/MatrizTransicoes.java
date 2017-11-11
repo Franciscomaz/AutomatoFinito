@@ -25,7 +25,7 @@ public final class MatrizTransicoes {
         construirMatriz(transicoes);
     }
     
-    public void construirMatriz(HashMap<String, List<String>> transicoes){
+    public void construirMatriz(HashMap<String, List<String>>transicoes){
         transicoes.forEach((k,v)->{
             for(String producao : v){
                 if(producao.length() > 1)
