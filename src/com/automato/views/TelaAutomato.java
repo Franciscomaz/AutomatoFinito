@@ -27,7 +27,14 @@ public final class TelaAutomato extends javax.swing.JPanel {
         this.automato = automato;
         tabelaAutomato.setModel(automato.getTabela());
     }
+    
+    public AutomatoFinito getAutomatoFinito(){
+        return automato;
+    }
 
+    public String getSentenca(){
+        return fieldSentenca.getText();
+    }
     
     /**
      * This method is called from within the constructor to initialize the form.

@@ -11,6 +11,9 @@ import com.automato.views.TelaPrincipal;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.SwingUtilities;
 
 /**
@@ -29,11 +32,23 @@ public class AutomatoListener implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
             case "Verificar":
-                break;
+                verificar();
+                break;    
             case "Voltar":
                 voltar();
                 break;
         }
+    }
+    
+    public void verificar(){
+        List<String> fita = new ArrayList<>();
+        String sentenca = telaAutomato.getSentenca();
+        
+        for(int i = 0; i < sentenca.length(); i++){
+            fita.add(sentenca.substring(i,i+1));
+        }
+        
+        telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
     }
     
     public void voltar() {

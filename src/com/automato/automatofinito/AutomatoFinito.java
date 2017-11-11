@@ -97,5 +97,25 @@ public class AutomatoFinito {
         }
         return pegaFinal;
     }
+    
+    public boolean reconhecerSentenca(List<String> fita){
+        String inicial = gramatica.getInicial();
+        Set<String> finais = getFinais();
+        MatrizTransicoes m = new MatrizTransicoes(gramatica.getTerminais(), gramatica.getNaoTerminais(), gramatica.getTransicoes());
+        String estado = inicial;
+        
+        for(String caracter : fita){
+            if(m.getTransicao(estado, caracter)!=null){
+                estado=m.getTransicao(estado, caracter);
+            } else{
+                return false;
+            }
+        }
+        
+        if(!finais.contains(estado))
+            return false;
+
+        return true;
+    }
 
 }
