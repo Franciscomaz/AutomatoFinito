@@ -5,7 +5,9 @@
  */
 package automato;
 
+import gramatica.Gramatica;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import matriz.Matriz;
@@ -14,15 +16,48 @@ import matriz.Matriz;
  *
  * @author Francisco
  */
-public interface AutomatoFinito {
-
-    public Set<String> getEstados();
-
-    public Set<String> getTerminais();
-
-    public String getInicial();
+public abstract class AutomatoFinito {
     
-    public HashMap<String, List<String>> getTransicoes();
+    protected final Matriz matrizTransicoes;
+    protected final Gramatica gramatica;
+    protected final Set<Estado> estados;
+
+    public AutomatoFinito(Gramatica gramatica) {
+        this.gramatica = gramatica;
+        this.estados = new HashSet<>();
+        this.matrizTransicoes = new Matriz(this);
+    }
     
-    public Matriz getMatrizTransicoes();
+    public HashMap<String, List<String>> getTransicoes(){
+        return gramatica.getTransicoes();
+    }   
+    /**
+     * @return the nTerminais
+     */
+    public Set<String> getEstados() {
+        return gramatica.getNaoTerminais();
+    }
+
+    /**
+     * @return the terminais
+     */
+    public Set<String> getTerminais() {
+        return gramatica.getTerminais();
+    }
+
+    /**
+     * @return the inicial
+     */
+    public String getInicial() {
+        return gramatica.getInicial();
+    }
+
+    public void setFinais() {
+
+    }
+
+    public Matriz getMatrizTransicoes() {
+        return matrizTransicoes;
+    }
+    
 }
