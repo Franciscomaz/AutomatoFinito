@@ -7,19 +7,19 @@ package automato;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import javax.swing.table.AbstractTableModel;
-
 
 /**
  *
  * @author Francisco
  */
-public class TabelaAutomato extends AbstractTableModel{
-    
+public class TabelaAutomato extends AbstractTableModel {
+
     private final AutomatoFinito automato;
     private final List<String> colunas;
-    
-    public TabelaAutomato(AutomatoFinito automato){
+
+    public TabelaAutomato(AutomatoFinito automato) {
         this.automato = automato;
         colunas = new ArrayList<>(automato.getTerminais());
         colunas.add(0, "Não terminais");
@@ -32,11 +32,11 @@ public class TabelaAutomato extends AbstractTableModel{
 
     @Override
     public int getColumnCount() {
-        return automato.getTerminais().size()+1;
+        return automato.getTerminais().size() + 1;
     }
-    
+
     @Override
-    public String getColumnName(int num){
+    public String getColumnName(int num) {
         return this.colunas.get(num);
     }
 
@@ -44,14 +44,20 @@ public class TabelaAutomato extends AbstractTableModel{
     public Object getValueAt(int linha, int coluna) {
         final List<String> nTerminais = new ArrayList<>(automato.getEstados());
         final List<String> terminais = new ArrayList<>(automato.getTerminais());
-        
-        if(coluna == 0) return nTerminais.get(linha);
+
+        if (coluna == 0) {
+            String nTerminal = nTerminais.get(linha);
+            if (automato.getInicial().equals(nTerminais.get(linha))) {
+                nTerminal = "->" + nTerminal;
+            }
+            return automato.verificaFinal(nTerminal) ? "*" + nTerminal : nTerminal;
+        }
         
         return automato
                 .getMatrizTransicoes()
-                .getTransicao(nTerminais.get(linha), terminais.get(coluna-1))
-                .toString();
+                .getTransicao(nTerminais.get(linha), terminais.get(coluna - 1))
+                .stream()
+                .collect(Collectors.joining());
     }
-    
 
 }

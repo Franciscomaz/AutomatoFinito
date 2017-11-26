@@ -52,7 +52,7 @@ public class AutomatoListener implements ActionListener {
             boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
             verificarSentenca(sentencaReconhecida);
         } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(telaAutomato, "Insira uma sentença.");
+            JOptionPane.showMessageDialog(telaAutomato, "Terminal não existente.");
         }
 
     }

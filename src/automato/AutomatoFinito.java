@@ -17,25 +17,26 @@ import matriz.Matriz;
  * @author Francisco
  */
 public abstract class AutomatoFinito {
-    
+
     protected final Matriz matrizTransicoes;
     protected final Gramatica gramatica;
-    protected final Set<Estado> estados;
+    protected final Set<String> estados;
 
     public AutomatoFinito(Gramatica gramatica) {
         this.gramatica = gramatica;
-        this.estados = new HashSet<>();
+        this.estados = gramatica.getNaoTerminais();
         this.matrizTransicoes = new Matriz(this);
     }
-    
-    public HashMap<String, List<String>> getTransicoes(){
+
+    public HashMap<String, List<String>> getTransicoes() {
         return gramatica.getTransicoes();
-    }   
+    }
+
     /**
      * @return the nTerminais
      */
     public Set<String> getEstados() {
-        return gramatica.getNaoTerminais();
+        return estados;
     }
 
     /**
@@ -52,12 +53,42 @@ public abstract class AutomatoFinito {
         return gramatica.getInicial();
     }
 
-    public void setFinais() {
+    public Set<String> getFinais() {
+        HashSet<String> pegaFinal = new HashSet<>();
 
+        for (String linha : gramatica.getLinhas()) {
+            //Converte a linha em char
+            List<String> producoes = gramatica.getProducoes(linha);
+            //for criado para fazer toda a operacao com a linha
+            for (String producao : producoes) {
+                //Checa se a letra na posicao j e minuscula E checa se na posicao j+1 e maiuscula
+                if (producao.length() < 2) {
+                    if (linha.contains(producao)) {
+                        for (String verificaFinal : producoes) {
+                            if (producao.equals("&")) {
+                                pegaFinal.add(linha.substring(0, 1));
+                            }
+                            if (verificaFinal.contains(producao) && verificaFinal.length() > 1) {
+                                pegaFinal.add(verificaFinal.substring(1));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return pegaFinal;
     }
 
     public Matriz getMatrizTransicoes() {
         return matrizTransicoes;
     }
     
+    public boolean verificaFinal(String estado) {
+        System.out.println(getFinais());
+        for(String s : getFinais()){
+             if (estado.contains(s)) return true;
+        }
+        return false;
+    }
+
 }

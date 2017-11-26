@@ -70,12 +70,12 @@ public class Gramatica {
     }
 
     //faz um array de strings à cada \n e depois passa para uma lista
-    private List<String> getLinhas() {
+    public List<String> getLinhas() {
         return Arrays.asList(gramatica.split("\n"));
     }
 
     //retorna as produções
-    private List<String> getProducoes(String linha) {
+    public List<String> getProducoes(String linha) {
         return Arrays.asList(linha.substring(2).split("[|]"));
     }
 

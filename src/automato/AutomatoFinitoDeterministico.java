@@ -7,6 +7,7 @@ package automato;
 
 import gramatica.Gramatica;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -23,13 +24,14 @@ public class AutomatoFinitoDeterministico extends AutomatoFinito {
         String estado = getInicial();
 
         for (String caracter : fita) {
-            estado = matrizTransicoes.getTransicao(estado, caracter).get(0);
+            estado = matrizTransicoes.getTransicao(estado, caracter).stream().collect(Collectors.joining(""));
             if (estado == null) {
                 return false;
             }
         }
-
-        return true;
+        return verificaFinal(estado);
     }
+    
+
 
 }

@@ -51,7 +51,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         gramaticaTextArea.setColumns(20);
         gramaticaTextArea.setRows(5);
-        gramaticaTextArea.setText("A=aB|a|bC|b\nB=aD|a|bC|b\nC=aE|a|bC|b\nD=aD|a|bC|b\nE=&");
+        gramaticaTextArea.setText("S=aA|bB|aS|aB|cD|dA\nA=aA|bS|bD|bA|cD|dC|&\nB=dD|aA|bB|cC\nC=aD|aC|bB|cD|&\nD=dD");
         jScrollPane1.setViewportView(gramaticaTextArea);
         AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
@@ -126,13 +126,9 @@ public class TelaGramatica extends javax.swing.JPanel {
     public void validaGramatica() throws AutomatoException{
         String gramatica = gramaticaTextArea.getText();
         
-        if(gramatica.equals("")){
-            throw new AutomatoException("Insira uma gramática válida.");
-        }
-        
         int index = gramatica.lastIndexOf("\n");
         
-        if(gramatica.substring(index+1).length() < 3){
+        if(gramatica.equals("")||gramatica.substring(index+1).length() < 3){
            throw new AutomatoException("Insira uma gramática válida.");
        }
     }

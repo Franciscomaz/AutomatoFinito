@@ -8,6 +8,7 @@ package matriz;
 import automato.AutomatoFinito;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -24,8 +25,14 @@ public final class Matriz {
         construirMatriz();
     }
 
-    public List<String> getTransicao(String nTerminal, String terminal) {
-        return matriz.get(nTerminal).getNTerminal(terminal);
+    public Set<String> getTransicao(String nTerminal, String terminal){
+        Set<String> aux = null;
+        try{
+            aux = matriz.get(nTerminal).getNTerminal(terminal);
+        } catch(Exception e){
+            
+        }
+        return aux;
     }
 
     private NoMatriz construirNo() {
@@ -43,25 +50,36 @@ public final class Matriz {
             for (String producao : v) {
                 //automato.getEstados().stream().filter(s-> s.equals(producao.substring(1))).findFirst();
                 if (producao.length() > 1) {
-                    addTransicao(k, producao.substring(0, 1), producao.substring(1));
+                    addTransicao(k, producao.substring(0, 1), producao.substring(1), false);
                 } else {
-                    addTransicao(k, producao.substring(0, 1), "");
+                    addTransicao(k, producao.substring(0, 1), "", false);
                 }
             }
         });
     }
 
-    public void addTransicao(String nTerminal, String terminal, String nTerminal2) {
+    public void addTransicao(String nTerminal, String terminal, String nTerminal2, boolean substituir) {
+        
+        if(substituir){
+            matriz.get(nTerminal).substituirEstado(terminal, nTerminal2);
+            return;
+        }
+        
         if (matriz.get(nTerminal) != null) {
             matriz.put(nTerminal, matriz.get(nTerminal).add(terminal, nTerminal2));
         } else {
             matriz.put(nTerminal, construirNo().add(terminal, nTerminal2));
         }
     }
-
+    
+    public boolean verificaEstado(String estado){
+        return matriz.containsKey(estado);
+    }
+    
+    
     public void imprimir() {
         matriz.forEach((k, v) -> {
-            System.out.println("Não terminal: " + k);
+            System.out.println("\nNão terminal: " + k);
             v.imprimir();
         });
     }
