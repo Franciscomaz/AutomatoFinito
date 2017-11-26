@@ -3,11 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.views;
-import com.automato.listener.GramaticaListener;
-import com.automato.utils.CustomDocumentFilter;
+package views;
+import utils.AutomatoException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import listener.GramaticaListener;
+import utils.CustomDocumentFilter;
 import javax.swing.text.AbstractDocument;
-import static com.automato.utils.GramaticaRegex.GRAMATICA;
+import static utils.GramaticaRegex.GRAMATICA;
 import javax.swing.JOptionPane;
 /**
  *
@@ -109,8 +113,6 @@ public class TelaGramatica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     public String getGramatica(){     
-        limpaGramatica();
-        
         try {
             validaGramatica();
             return gramaticaTextArea.getText();
@@ -127,15 +129,11 @@ public class TelaGramatica extends javax.swing.JPanel {
         if(gramatica.equals("")){
             throw new AutomatoException("Insira uma gramática válida.");
         }
-    }
-    //para quando tiver so o nao terminal e o "=" em uma linha
-    public void limpaGramatica(){
-        String gramatica = gramaticaTextArea.getText();
         
         int index = gramatica.lastIndexOf("\n");
         
         if(gramatica.substring(index+1).length() < 3){
-           gramaticaTextArea.setText(gramatica.substring(0,index+1));
+           throw new AutomatoException("Insira uma gramática válida.");
        }
     }
     

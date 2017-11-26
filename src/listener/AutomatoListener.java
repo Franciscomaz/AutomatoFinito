@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.listener;
+package listener;
 
-import com.automato.views.TelaAutomato;
-import com.automato.views.TelaGramatica;
-import com.automato.views.TelaPrincipal;
+import views.TelaAutomato;
+import views.TelaGramatica;
+import views.TelaPrincipal;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
@@ -50,7 +49,7 @@ public class AutomatoListener implements ActionListener {
         }
         boolean sentencaReconhecida = false;
         try{
-             sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
+            sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
         } catch(NullPointerException ex){
             
         }

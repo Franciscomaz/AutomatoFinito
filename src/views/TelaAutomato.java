@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.views;
+package views;
 
-import com.automato.automatofinito.AutomatoFinito;
-import com.automato.listener.AutomatoListener;
+import automato.AutomatoFinito;
+import automato.AutomatoFinitoDeterministico;
+import automato.TabelaAutomato;
+import listener.AutomatoListener;
 
 /**
  *
@@ -15,20 +17,21 @@ import com.automato.listener.AutomatoListener;
 public final class TelaAutomato extends javax.swing.JPanel {
 
     private final AutomatoListener l = new AutomatoListener(this);
-    private final AutomatoFinito automato;
+    private final AutomatoFinitoDeterministico automato;
 
     /**
      * Creates new form TelaAutomato
      *
      * @param automato
      */
-    public TelaAutomato(AutomatoFinito automato) {
+    public TelaAutomato(AutomatoFinitoDeterministico automato) {
         initComponents();
         this.automato = automato;
-        tabelaAutomato.setModel(automato.getTabela());
+        tabelaAutomato.setModel(new TabelaAutomato(automato));
+        automato.getMatrizTransicoes().imprimir();
     }
     
-    public AutomatoFinito getAutomatoFinito(){
+    public AutomatoFinitoDeterministico getAutomatoFinito(){
         return automato;
     }
 

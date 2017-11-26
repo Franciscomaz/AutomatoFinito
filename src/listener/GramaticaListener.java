@@ -3,13 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.listener;
+package listener;
 
-import com.automato.automatofinito.AutomatoFinito;
-import com.automato.gramatica.Gramatica;
-import com.automato.views.TelaAutomato;
-import com.automato.views.TelaGramatica;
-import com.automato.views.TelaPrincipal;
+import automato.AutomatoFinitoDeterministico;
+import gramatica.Gramatica;
+import views.TelaAutomato;
+import views.TelaGramatica;
+import views.TelaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -43,7 +43,7 @@ public class GramaticaListener implements ActionListener{
         
         TelaPrincipal tp = (TelaPrincipal)SwingUtilities.getWindowAncestor(telaGramatica);
         telaGramatica.setVisible(false);
-        tp.add(new TelaAutomato(new AutomatoFinito(new Gramatica(gramatica))));
+        tp.add(new TelaAutomato(new AutomatoFinitoDeterministico(new Gramatica(gramatica))));
         test(gramatica);
     }
      
