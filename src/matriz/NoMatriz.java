@@ -21,12 +21,11 @@ public class NoMatriz {
         no = new HashMap<>();
     }
 
-    public String getNTerminal(String terminal) {
+    public List<String> getNTerminal(String terminal) {
         return no.get(terminal)
                 .stream()
-                .map(i -> i)
                 .filter(s-> s != null && !s.isEmpty())
-                .collect(Collectors.joining(","));
+                .collect(Collectors.toList());
     }
 
     public NoMatriz add(String terminal, String nTerminal) {

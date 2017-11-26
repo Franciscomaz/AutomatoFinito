@@ -5,7 +5,6 @@
  */
 package views;
 
-import automato.AutomatoFinito;
 import automato.AutomatoFinitoDeterministico;
 import automato.TabelaAutomato;
 import listener.AutomatoListener;

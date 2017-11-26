@@ -7,6 +7,7 @@ package automato;
 
 import gramatica.Gramatica;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import matriz.Matriz;
@@ -19,16 +20,18 @@ public class AutomatoFinitoDeterministico implements AutomatoFinito {
 
     private final Matriz matrizTransicoes;
     private final Gramatica gramatica;
+    private final Set<Estado> estados;
 
     public AutomatoFinitoDeterministico(Gramatica gramatica) {
         this.gramatica = gramatica;
+        this.estados = new HashSet<>();
         this.matrizTransicoes = new Matriz(this);
     }
     
+    @Override
     public HashMap<String, List<String>> getTransicoes(){
         return gramatica.getTransicoes();
-    }
-    
+    }   
     /**
      * @return the nTerminais
      */
@@ -66,7 +69,7 @@ public class AutomatoFinitoDeterministico implements AutomatoFinito {
         String estado = getInicial();
 
         for (String caracter : fita) {
-            estado = matrizTransicoes.getTransicao(estado, caracter);
+            estado = matrizTransicoes.getTransicao(estado, caracter).get(0);
             if (estado == null) {
                 return false;
             }

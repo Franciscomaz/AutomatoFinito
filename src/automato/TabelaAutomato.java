@@ -49,7 +49,8 @@ public class TabelaAutomato extends AbstractTableModel{
         
         return automato
                 .getMatrizTransicoes()
-                .getTransicao(nTerminais.get(linha), terminais.get(coluna-1));
+                .getTransicao(nTerminais.get(linha), terminais.get(coluna-1))
+                .toString();
     }
     
 

@@ -5,7 +5,9 @@
  */
 package automato;
 
+import gramatica.Gramatica;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import matriz.Matriz;
@@ -16,29 +18,51 @@ import matriz.Matriz;
  */
 public class AutomatoFinitoNaoDeterministico implements AutomatoFinito{
 
+    private final Matriz matrizTransicoes;
+    private final Gramatica gramatica;
+    private final Set<Estado> estados;
+
+    public AutomatoFinitoNaoDeterministico(Gramatica gramatica) {
+        this.gramatica = gramatica;
+        this.estados = new HashSet<>();
+        this.matrizTransicoes = new Matriz(this);
+    }
+    
+    @Override
+    public HashMap<String, List<String>> getTransicoes(){
+        return gramatica.getTransicoes();
+    }   
+    /**
+     * @return the nTerminais
+     */
     @Override
     public Set<String> getEstados() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gramatica.getNaoTerminais();
     }
 
+    /**
+     * @return the terminais
+     */
     @Override
     public Set<String> getTerminais() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gramatica.getTerminais();
     }
 
+    /**
+     * @return the inicial
+     */
     @Override
     public String getInicial() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return gramatica.getInicial();
+    }
+
+    public void setFinais() {
+
     }
 
     @Override
     public Matriz getMatrizTransicoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public HashMap<String, List<String>> getTransicoes() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return matrizTransicoes;
     }
     
 }

@@ -7,6 +7,7 @@ package matriz;
 
 import automato.AutomatoFinito;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  *
@@ -20,21 +21,27 @@ public final class Matriz {
     public Matriz(AutomatoFinito automato) {
         this.matriz = new HashMap<>();
         this.automato = automato;
-        construirMaztriz();
+        construirMatriz();
+    }
+
+    public List<String> getTransicao(String nTerminal, String terminal) {
+        return matriz.get(nTerminal).getNTerminal(terminal);
     }
 
     private NoMatriz construirNo() {
         NoMatriz no = new NoMatriz();
-        
+
         for (String terminal : automato.getTerminais()) {
             no.add(terminal, null);
         }
+        
         return no;
     }
 
-    private void construirMaztriz() {
+    private void construirMatriz() {
         automato.getTransicoes().forEach((k, v) -> {
             for (String producao : v) {
+                //automato.getEstados().stream().filter(s-> s.equals(producao.substring(1))).findFirst();
                 if (producao.length() > 1) {
                     addTransicao(k, producao.substring(0, 1), producao.substring(1));
                 } else {
@@ -50,10 +57,6 @@ public final class Matriz {
         } else {
             matriz.put(nTerminal, construirNo().add(terminal, nTerminal2));
         }
-    }
-
-    public String getTransicao(String nTerminal, String terminal) {
-        return matriz.get(nTerminal).getNTerminal(terminal);
     }
 
     public void imprimir() {

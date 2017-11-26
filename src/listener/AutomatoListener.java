@@ -33,48 +33,52 @@ public class AutomatoListener implements ActionListener {
         switch (ae.getActionCommand()) {
             case "Verificar":
                 verificar();
-                break;    
+                break;
             case "Voltar":
                 voltar();
                 break;
         }
     }
-    
-    public void verificar(){
+
+    public void verificar() {
         List<String> fita = new ArrayList<>();
         String sentenca = telaAutomato.getSentenca();
-        
-        for(int i = 0; i < sentenca.length(); i++){
-            fita.add(sentenca.substring(i,i+1));
-        }
-        boolean sentencaReconhecida = false;
-        try{
-            sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
-        } catch(NullPointerException ex){
-            
+
+        for (int i = 0; i < sentenca.length(); i++) {
+            fita.add(sentenca.substring(i, i + 1));
         }
         
-        if(sentencaReconhecida){
+        try {
+            boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
+            verificarSentenca(sentencaReconhecida);
+        } catch (NullPointerException ex) {
+            JOptionPane.showMessageDialog(telaAutomato, "Insira uma sentença.");
+        }
+
+    }
+
+    public void verificarSentenca(boolean sentencaReconhecida) {
+        if (sentencaReconhecida) {
             JOptionPane.showMessageDialog(telaAutomato, "Sentença reconhecida.");
         } else {
             JOptionPane.showMessageDialog(telaAutomato, "Sentença invalida.");
         }
     }
-    
+
     public void voltar() {
         TelaPrincipal tp = (TelaPrincipal) SwingUtilities.getWindowAncestor(telaAutomato);
         tp.remove(telaAutomato);
         getComponent(tp);
     }
-    
-    public void getComponent(TelaPrincipal tp){       
-        for (Component c : tp.getContentPane().getComponents()){
-            if(c instanceof TelaGramatica){             
+
+    public void getComponent(TelaPrincipal tp) {
+        for (Component c : tp.getContentPane().getComponents()) {
+            if (c instanceof TelaGramatica) {
                 c.setVisible(true);
                 tp.add(c);
                 return;
-            }        
-        }  
+            }
+        }
     }
-    
+
 }
