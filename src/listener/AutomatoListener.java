@@ -81,6 +81,11 @@ public class AutomatoListener implements ActionListener {
        telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
     }
     
+    public void criarNovoEstado(){
+        
+    }
+    
+    
     public void getComponent(TelaPrincipal tp) {
         for (Component c : tp.getContentPane().getComponents()) {
             if (c instanceof TelaGramatica) {

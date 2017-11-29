@@ -20,17 +20,22 @@ import matriz.Matriz;
 public abstract class AutomatoFinito {
 
     protected final Matriz matrizTransicoes;
-    protected final Gramatica gramatica;
     protected final Set<String> estados;
-
-    public AutomatoFinito(Gramatica gramatica) {
-        this.gramatica = gramatica;
-        this.estados = gramatica.getNaoTerminais();
+    protected final HashMap<String, List<String>> transicoes;
+    protected final Set<String> terminais;
+    protected final String inicial;
+    
+    public AutomatoFinito(HashMap<String, List<String>>transicoes, 
+        Set<String> estados, Set<String> terminais, String inicial) {
+        this.estados = estados;
+        this.inicial = inicial;
+        this.terminais = terminais;
+        this.transicoes = transicoes;
         this.matrizTransicoes = new Matriz(this);
     }
 
     public HashMap<String, List<String>> getTransicoes() {
-        return gramatica.getTransicoes();
+        return transicoes;
     }
 
     /**
@@ -44,42 +49,25 @@ public abstract class AutomatoFinito {
      * @return the terminais
      */
     public Set<String> getTerminais() {
-        return gramatica.getTerminais();
+        return terminais;
     }
 
     /**
      * @return the inicial
      */
     public String getInicial() {
-        return gramatica.getInicial();
+        return inicial;
     }
 
     public Set<String> getFinais() {
-        HashSet<String> pegaFinal = new HashSet<>();
-
-        for (String linha : gramatica.getLinhas()) {
-            //Converte a linha em char
-            List<String> producoes = gramatica.getProducoes(linha);
-            //for criado para fazer toda a operacao com a linha
-            for (String producao : producoes) {
-                //Checa se a letra na posicao j e minuscula E checa se na posicao j+1 e maiuscula
-                if (producao.length() < 2) {
-                    if (!temNaoDeterminacao(producoes, producao)) {
-                        if (linha.contains(producao)) {
-                            for (String verificaFinal : producoes) {
-                                if (producao.equals("&")) {
-                                    pegaFinal.add(linha.substring(0, 1));
-                                }
-                                if (verificaFinal.contains(producao) && verificaFinal.length() > 1) {
-                                    pegaFinal.add(verificaFinal.substring(1));
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        return pegaFinal;
+        Set<String> finais = new HashSet<>();
+        
+        transicoes.forEach((k,v)->{
+            if(v.contains("&"))
+                finais.add(k);
+        });
+        
+        return finais;
     }
 
     public boolean isNaoDeterministico() {

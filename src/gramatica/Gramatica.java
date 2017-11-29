@@ -23,14 +23,9 @@ public class Gramatica {
         this.gramatica = gramatica;
     }
 
-    //retorna a gramática
-    public String getGramatica() {
-        return gramatica;
-    }
-
     //retorna o inicial
     public String getInicial() {
-        return gramatica.substring(0,1);
+        return gramatica.substring(0, 1);
     }
 
     //retorn os terminais
@@ -39,8 +34,7 @@ public class Gramatica {
 
         for (String s : getLinhas()) {
             for (String producao : getProducoes(s)) {
-                if(!producao.substring(0, 1).equals("&"))
-                    terminais.add(producao.substring(0, 1));
+                terminais.add(producao.substring(0, 1));
             }
         }
 

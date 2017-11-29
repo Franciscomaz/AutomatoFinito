@@ -6,7 +6,9 @@
 package automato;
 
 import gramatica.Gramatica;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 
@@ -16,8 +18,8 @@ import java.util.stream.Collectors;
  */
 public class AutomatoFinitoDeterministico extends AutomatoFinito {
 
-    public AutomatoFinitoDeterministico(Gramatica gramatica) {
-        super(gramatica);
+    public AutomatoFinitoDeterministico(HashMap<String, List<String>> transicoes, Set<String> estados, Set<String> terminais, String inicial) {
+        super(transicoes, estados, terminais, inicial);
     }
 
     public boolean reconhecerSentenca(List<String> fita) {
