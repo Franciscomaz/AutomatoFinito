@@ -27,7 +27,7 @@ public final class TelaAutomato extends javax.swing.JPanel {
         initComponents();
         this.automato = automato;
         automato.getMatrizTransicoes().imprimir();
-        transformarAfnd.setVisible(automato.isNaoDeterministico());
+        //transformarAfnd.setVisible(!automato.isNaoDeterministico());
         tabelaAutomato.setModel(new TabelaAutomato(automato));
     }
     
