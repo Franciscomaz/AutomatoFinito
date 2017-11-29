@@ -25,12 +25,12 @@ public final class Matriz {
         construirMatriz();
     }
 
-    public Set<String> getTransicao(String nTerminal, String terminal){
+    public Set<String> getTransicao(String nTerminal, String terminal) {
         Set<String> aux = null;
-        try{
+        try {
             aux = matriz.get(nTerminal).getNTerminal(terminal);
-        } catch(Exception e){
-            
+        } catch (Exception e) {
+
         }
         return aux;
     }
@@ -41,7 +41,7 @@ public final class Matriz {
         for (String terminal : automato.getTerminais()) {
             no.add(terminal, null);
         }
-        
+
         return no;
     }
 
@@ -54,29 +54,29 @@ public final class Matriz {
                 } else {
                     addTransicao(k, producao.substring(0, 1), "", false);
                 }
+
             }
         });
     }
 
     public void addTransicao(String nTerminal, String terminal, String nTerminal2, boolean substituir) {
-        
-        if(substituir){
+
+        if (substituir) {
             matriz.get(nTerminal).substituirEstado(terminal, nTerminal2);
             return;
         }
-        
+
         if (matriz.get(nTerminal) != null) {
             matriz.put(nTerminal, matriz.get(nTerminal).add(terminal, nTerminal2));
         } else {
             matriz.put(nTerminal, construirNo().add(terminal, nTerminal2));
         }
     }
-    
-    public boolean verificaEstado(String estado){
+
+    public boolean verificaEstado(String estado) {
         return matriz.containsKey(estado);
     }
-    
-    
+
     public void imprimir() {
         matriz.forEach((k, v) -> {
             System.out.println("\nNão terminal: " + k);

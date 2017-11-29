@@ -44,7 +44,7 @@ public class TabelaAutomato extends AbstractTableModel {
     public Object getValueAt(int linha, int coluna) {
         final List<String> nTerminais = new ArrayList<>(automato.getEstados());
         final List<String> terminais = new ArrayList<>(automato.getTerminais());
-
+        
         if (coluna == 0) {
             String nTerminal = nTerminais.get(linha);
             if (automato.getInicial().equals(nTerminais.get(linha))) {

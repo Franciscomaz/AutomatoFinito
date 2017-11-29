@@ -30,6 +30,7 @@ public abstract class AutomatoFinito {
         this.estados = estados;
         this.inicial = inicial;
         this.terminais = terminais;
+        terminais.remove("&");
         this.transicoes = transicoes;
         this.matrizTransicoes = new Matriz(this);
     }

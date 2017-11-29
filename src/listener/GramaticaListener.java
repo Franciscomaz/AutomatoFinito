@@ -61,7 +61,7 @@ public class GramaticaListener implements ActionListener {
 
         transicoes.forEach((k, v) -> {
             for (String producao : v) {
-                if (producao.length() < 2) {
+                if (producao.length() < 2 && !producao.equals("&")) {
                     excluiEstados.add(k + producao);
                     nTerminais.add("X");
                 }
