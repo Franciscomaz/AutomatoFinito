@@ -21,7 +21,7 @@ public class AfndParaAfd {
 
     public AfndParaAfd(AutomatoFinitoDeterministico automato) {
         this.automato = automato;
-        test();
+        converter();
     }
 
     public AutomatoFinitoDeterministico getAutomato() {
@@ -58,7 +58,7 @@ public class AfndParaAfd {
                 .collect(Collectors.joining(""));
     }
 
-    public void test() {
+    public void converter() {
         Matriz matriz = automato.getMatrizTransicoes();
         HashSet<String> aux = new HashSet<>(automato.getEstados());
         boolean temNaoDeterminacao = false;
@@ -69,7 +69,7 @@ public class AfndParaAfd {
                 if (lista.size() > 1) {
                     temNaoDeterminacao = true;
                     String novoEstado = criarNovoEstado(lista);
-                    if (!matriz.verificaEstado(criarNovoEstado(lista))) {
+                    if (!matriz.verificaEstado(novoEstado)) {
                         adicionarNovoEstado(lista, matriz, novoEstado);
                     }
                     matriz.addTransicao(estado, terminal, novoEstado, true);
@@ -77,7 +77,8 @@ public class AfndParaAfd {
             }
         }
         
-        if(temNaoDeterminacao) test(); 
+        if(temNaoDeterminacao) 
+            converter(); 
     }
 
 }

@@ -63,13 +63,15 @@ public abstract class AutomatoFinito {
             for (String producao : producoes) {
                 //Checa se a letra na posicao j e minuscula E checa se na posicao j+1 e maiuscula
                 if (producao.length() < 2) {
-                    if (linha.contains(producao)) {
-                        for (String verificaFinal : producoes) {
-                            if (producao.equals("&")) {
-                                pegaFinal.add(linha.substring(0, 1));
-                            }
-                            if (verificaFinal.contains(producao) && verificaFinal.length() > 1) {
-                                pegaFinal.add(verificaFinal.substring(1));
+                    if (!temNaoDeterminacao(producoes, producao)) {
+                        if (linha.contains(producao)) {
+                            for (String verificaFinal : producoes) {
+                                if (producao.equals("&")) {
+                                    pegaFinal.add(linha.substring(0, 1));
+                                }
+                                if (verificaFinal.contains(producao) && verificaFinal.length() > 1) {
+                                    pegaFinal.add(verificaFinal.substring(1));
+                                }
                             }
                         }
                     }
@@ -79,14 +81,23 @@ public abstract class AutomatoFinito {
         return pegaFinal;
     }
 
+    public boolean temNaoDeterminacao(List<String> producoes, String terminal) {
+        return producoes
+                .stream()
+                .filter(producao -> producao.contains(terminal))
+                .count() > 2;
+    }
+
     public Matriz getMatrizTransicoes() {
         return matrizTransicoes;
     }
-    
+
     public boolean verificaFinal(String estado) {
         System.out.println(getFinais());
-        for(String s : getFinais()){
-             if (estado.contains(s)) return true;
+        for (String s : getFinais()) {
+            if (estado.contains(s)) {
+                return true;
+            }
         }
         return false;
     }
