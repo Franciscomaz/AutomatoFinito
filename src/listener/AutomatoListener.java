@@ -5,6 +5,8 @@
  */
 package listener;
 
+import automato.AfndParaAfd;
+import automato.TabelaAutomato;
 import views.TelaAutomato;
 import views.TelaGramatica;
 import views.TelaPrincipal;
@@ -33,6 +35,9 @@ public class AutomatoListener implements ActionListener {
         switch (ae.getActionCommand()) {
             case "Verificar":
                 verificar();
+                break;
+            case "TransformarAfnd":
+                TransformarAfnd();
                 break;
             case "Voltar":
                 voltar();
@@ -70,7 +75,12 @@ public class AutomatoListener implements ActionListener {
         tp.remove(telaAutomato);
         getComponent(tp);
     }
-
+    
+    public void TransformarAfnd(){
+       AfndParaAfd afndParaAfd = new AfndParaAfd(telaAutomato.getAutomatoFinito());
+       telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
+    }
+    
     public void getComponent(TelaPrincipal tp) {
         for (Component c : tp.getContentPane().getComponents()) {
             if (c instanceof TelaGramatica) {

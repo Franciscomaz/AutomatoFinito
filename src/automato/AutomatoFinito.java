@@ -9,6 +9,7 @@ import gramatica.Gramatica;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import matriz.Matriz;
 
@@ -79,6 +80,19 @@ public abstract class AutomatoFinito {
             }
         }
         return pegaFinal;
+    }
+
+    public boolean isNaoDeterministico() {
+        for (Map.Entry<String, List<String>> entry : getTransicoes().entrySet()) {
+            for (String producao : entry.getValue()) {
+                if (producao.length() < 2) {
+                    if (temNaoDeterminacao(entry.getValue(), producao)) {
+                        return true;
+                    }
+                }
+            }
+        }
+        return false;
     }
 
     public boolean temNaoDeterminacao(List<String> producoes, String terminal) {

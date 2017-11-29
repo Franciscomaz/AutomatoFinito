@@ -13,7 +13,6 @@ import views.TelaGramatica;
 import views.TelaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
 /**
@@ -44,14 +43,7 @@ public class GramaticaListener implements ActionListener{
         
         TelaPrincipal tp = (TelaPrincipal)SwingUtilities.getWindowAncestor(telaGramatica);
         telaGramatica.setVisible(false);
-        tp.add(new TelaAutomato(new AfndParaAfd(new AutomatoFinitoDeterministico(new Gramatica(gramatica))).getAutomato()));
-        test(gramatica);
+        tp.add(new TelaAutomato(new AutomatoFinitoDeterministico(new Gramatica(gramatica))));
     }
      
-    
-    public void test(String gramatica){
-        Gramatica g = new Gramatica(gramatica);
-        System.out.println(g.getNaoTerminais());
-        System.out.println(g.getTerminais());
-    }    
 }

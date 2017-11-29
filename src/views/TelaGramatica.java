@@ -5,9 +5,6 @@
  */
 package views;
 import utils.AutomatoException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import listener.GramaticaListener;
 import utils.CustomDocumentFilter;
 import javax.swing.text.AbstractDocument;

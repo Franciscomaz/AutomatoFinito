@@ -27,9 +27,12 @@ public final class TelaAutomato extends javax.swing.JPanel {
         initComponents();
         this.automato = automato;
         automato.getMatrizTransicoes().imprimir();
+        transformarAfnd.setVisible(automato.isNaoDeterministico());
         tabelaAutomato.setModel(new TabelaAutomato(automato));
-        
-
+    }
+    
+    public void setModel(TabelaAutomato tabelaModel){
+       tabelaAutomato.setModel(tabelaModel);
     }
     
     public AutomatoFinitoDeterministico getAutomatoFinito(){
@@ -55,6 +58,7 @@ public final class TelaAutomato extends javax.swing.JPanel {
         fieldSentenca = new javax.swing.JTextField();
         btnVerificar = new javax.swing.JButton();
         buttonVoltar = new javax.swing.JButton();
+        transformarAfnd = new javax.swing.JButton();
 
         setMaximumSize(new java.awt.Dimension(400, 528));
         setMinimumSize(new java.awt.Dimension(400, 528));
@@ -81,6 +85,10 @@ public final class TelaAutomato extends javax.swing.JPanel {
         buttonVoltar.addActionListener(l);
         buttonVoltar.setText("Voltar");
 
+        transformarAfnd.addActionListener(l);
+        transformarAfnd.setText("Mostrar Afd");
+        transformarAfnd.setActionCommand("TransformarAfnd");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -92,15 +100,17 @@ public final class TelaAutomato extends javax.swing.JPanel {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addGap(12, 12, 12)
-                                .addComponent(fieldSentenca, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnVerificar))
-                            .addComponent(buttonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(12, 12, 12))))
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(fieldSentenca, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnVerificar)
+                        .addGap(12, 12, 12))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(buttonVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(transformarAfnd)
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,9 +124,11 @@ public final class TelaAutomato extends javax.swing.JPanel {
                         .addComponent(fieldSentenca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnVerificar, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 401, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
-                .addComponent(buttonVoltar)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buttonVoltar)
+                    .addComponent(transformarAfnd))
                 .addGap(17, 17, 17))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -129,5 +141,6 @@ public final class TelaAutomato extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabelaAutomato;
+    private javax.swing.JButton transformarAfnd;
     // End of variables declaration//GEN-END:variables
 }
