@@ -26,7 +26,7 @@ public class AutomatoFinitoDeterministico extends AutomatoFinito {
         String estado = getInicial();
 
         for (String caracter : fita) {
-            estado = matrizTransicoes.getTransicao(estado, caracter).stream().collect(Collectors.joining(""));
+            estado = matrizTransicoes.getTransicao(estado, caracter);
             if (estado == null) {
                 return false;
             }

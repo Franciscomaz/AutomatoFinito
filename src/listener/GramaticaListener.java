@@ -5,7 +5,7 @@
  */
 package listener;
 
-import automato.AfndParaAfd;
+import automato.ConverterAfnd;
 import automato.AutomatoFinito;
 import automato.AutomatoFinitoDeterministico;
 import gramatica.Gramatica;

@@ -5,7 +5,7 @@
  */
 package listener;
 
-import automato.AfndParaAfd;
+import automato.ConverterAfnd;
 import automato.TabelaAutomato;
 import views.TelaAutomato;
 import views.TelaGramatica;
@@ -77,7 +77,7 @@ public class AutomatoListener implements ActionListener {
     }
     
     public void TransformarAfnd(){
-       AfndParaAfd afndParaAfd = new AfndParaAfd(telaAutomato.getAutomatoFinito());
+       ConverterAfnd afndParaAfd = new ConverterAfnd(telaAutomato.getAutomatoFinito());
        telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
     }
     
