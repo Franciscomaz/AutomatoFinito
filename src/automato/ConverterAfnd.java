@@ -6,11 +6,8 @@
 package automato;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Set;
 import java.util.stream.Collectors;
 import matriz.Matriz;
@@ -48,13 +45,22 @@ public class ConverterAfnd {
                         matriz.adicionarNovoEstado(novoEstado);
                         estados.add(novoEstado);
                         automato.getEstados().add(novoEstado);
+                        adicionarTransicoesNovoEstado(novoEstado);
                         length++;
                     }
                 }
             }
         }
     }
-
+    
+    public void adicionarTransicoesNovoEstado(String novoEstado){
+        for(int i = 0; i < novoEstado.length(); i++){
+            for(String terminais : automato.getTerminais()){
+                automato.getMatrizTransicoes().addTransicao(novoEstado, terminais, novoEstado.substring(i,i+1));
+            }
+        }
+    }
+    
     public String novoEstado(String[] estados) {
         Set<String> novoEstado = new HashSet<>();
 
