@@ -32,7 +32,7 @@ public abstract class AutomatoFinito {
         this.terminais = terminais;
         terminais.remove("&");
         this.transicoes = transicoes;
-        this.matrizTransicoes = new Matriz(this);
+        this.matrizTransicoes = new Matriz(this).construirMatriz();
     }
 
     public HashMap<String, List<String>> getTransicoes() {

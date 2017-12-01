@@ -78,6 +78,7 @@ public class AutomatoListener implements ActionListener {
     
     public void TransformarAfnd(){
        ConverterAfnd afndParaAfd = new ConverterAfnd(telaAutomato.getAutomatoFinito());
+       afndParaAfd.getAutomato().getMatrizTransicoes().imprimir();
        telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
     }
     

@@ -33,7 +33,7 @@ public class ConverterAfnd {
     }
 
     public void converter() {
-        Matriz matriz = new Matriz(automato).construirMatriz();
+        Matriz matriz = automato.getMatrizTransicoes();
         List<String> estados = new ArrayList(automato.getEstados());
 
         int length = estados.size();
@@ -47,6 +47,7 @@ public class ConverterAfnd {
                     if (!matriz.containsEstado(novoEstado)) {
                         matriz.adicionarNovoEstado(novoEstado);
                         estados.add(novoEstado);
+                        automato.getEstados().add(novoEstado);
                         length++;
                     }
                 }

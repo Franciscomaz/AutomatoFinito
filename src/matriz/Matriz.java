@@ -42,6 +42,7 @@ public class Matriz {
                 }
             }
         });
+        
         return this;
     }
     
@@ -51,7 +52,8 @@ public class Matriz {
     
     public void addTransicao(String estado, String terminal, String estado1){
         String transicao = matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)];
-        if(transicao == null)
+        System.out.println(transicao);
+        if("".equals(transicao))
             matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = estado1;
         else
             matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = transicao + "," + estado1;       
@@ -73,6 +75,7 @@ public class Matriz {
     }
     
     public void imprimir(){
+        System.out.println(nTerminais);
         for(int i = 0; i < nTerminais.size(); i++){
             for(int j = 0; j < terminais.size(); j++){
                 System.out.println("("+nTerminais.get(i)
