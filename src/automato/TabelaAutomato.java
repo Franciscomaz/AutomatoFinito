@@ -42,8 +42,8 @@ public class TabelaAutomato extends AbstractTableModel {
 
     @Override
     public Object getValueAt(int linha, int coluna) {
-        final List<String> nTerminais = new ArrayList<>(automato.getEstados());
-        final List<String> terminais = new ArrayList<>(automato.getTerminais());
+        final List<String> nTerminais = automato.getEstados();
+        final List<String> terminais = automato.getTerminais();
         
         if (coluna == 0) {
             String nTerminal = nTerminais.get(linha);

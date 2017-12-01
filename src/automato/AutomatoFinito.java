@@ -6,6 +6,7 @@
 package automato;
 
 import gramatica.Gramatica;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -20,17 +21,16 @@ import matriz.Matriz;
 public abstract class AutomatoFinito {
 
     protected final Matriz matrizTransicoes;
-    protected final Set<String> estados;
+    protected final List<String> estados;
     protected final HashMap<String, List<String>> transicoes;
-    protected final Set<String> terminais;
+    protected final List<String> terminais;
     protected final String inicial;
     
     public AutomatoFinito(HashMap<String, List<String>>transicoes, 
         Set<String> estados, Set<String> terminais, String inicial) {
-        this.estados = estados;
+        this.estados = new ArrayList<>(estados);
         this.inicial = inicial;
-        this.terminais = terminais;
-        terminais.remove("&");
+        this.terminais = new ArrayList<>(terminais);
         this.transicoes = transicoes;
         this.matrizTransicoes = new Matriz(this).construirMatriz();
     }
@@ -42,14 +42,14 @@ public abstract class AutomatoFinito {
     /**
      * @return the nTerminais
      */
-    public Set<String> getEstados() {
+    public List<String> getEstados() {
         return estados;
     }
 
     /**
      * @return the terminais
      */
-    public Set<String> getTerminais() {
+    public List<String> getTerminais() {
         return terminais;
     }
 

@@ -34,7 +34,8 @@ public class Gramatica {
 
         for (String s : getLinhas()) {
             for (String producao : getProducoes(s)) {
-                terminais.add(producao.substring(0, 1));
+                if(!producao.equals("&"))
+                    terminais.add(producao.substring(0, 1));
             }
         }
 

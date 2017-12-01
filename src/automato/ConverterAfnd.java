@@ -16,7 +16,7 @@ import matriz.Matriz;
  *
  * @author Francisco
  */
-public class ConverterAfnd {
+public final class ConverterAfnd {
 
     private final AutomatoFinitoDeterministico automato;
 
@@ -31,7 +31,7 @@ public class ConverterAfnd {
 
     public void converter() {
         Matriz matriz = automato.getMatrizTransicoes();
-        List<String> estados = new ArrayList(automato.getEstados());
+        List<String> estados = automato.getEstados();
 
         int length = estados.size();
         for (int i = 0; i < length; i++) {
@@ -43,8 +43,6 @@ public class ConverterAfnd {
                     matriz.substituirTransicao(estado, terminal, novoEstado);
                     if (!matriz.containsEstado(novoEstado)) {
                         matriz.adicionarNovoEstado(novoEstado);
-                        estados.add(novoEstado);
-                        automato.getEstados().add(novoEstado);
                         adicionarTransicoesNovoEstado(novoEstado);
                         length++;
                     }
@@ -57,7 +55,6 @@ public class ConverterAfnd {
         Matriz matriz = automato.getMatrizTransicoes();
         for (String terminal : automato.getTerminais()) {
             for (int i = 0; i < novoEstado.length(); i++) {
-                System.out.println(matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
                 matriz.addTransicao(novoEstado, terminal, matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
             }
         }
