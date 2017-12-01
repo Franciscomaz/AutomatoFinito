@@ -8,7 +8,6 @@ package automato;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 
 /**
@@ -22,10 +21,11 @@ public class AutomatoFinitoDeterministico extends AutomatoFinito {
     }
 
     @Override
-    public boolean reconhecerSentenca(List<String> fita) {
+    public boolean reconhecerSentenca(Fita fita) {
         String estado = getInicial();
-
-        for (String caracter : fita) {
+        String caracter;
+        
+        while ((caracter = fita.getProximo())!=null) {
             estado = matrizTransicoes.getTransicao(estado, caracter);
             if (estado == null) {
                 return false;

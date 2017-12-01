@@ -57,6 +57,7 @@ public class ConverterAfnd {
         Matriz matriz = automato.getMatrizTransicoes();
         for (String terminal : automato.getTerminais()) {
             for (int i = 0; i < novoEstado.length(); i++) {
+                System.out.println(matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
                 matriz.addTransicao(novoEstado, terminal, matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
             }
         }

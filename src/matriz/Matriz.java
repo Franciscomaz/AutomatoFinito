@@ -52,7 +52,8 @@ public class Matriz {
     
     public void addTransicao(String estado, String terminal, String estado1){
         String transicao = matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)];
-        System.out.println(transicao);
+        if(estado1.equals(""))
+            return;
         if("".equals(transicao))
             matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = estado1;
         else

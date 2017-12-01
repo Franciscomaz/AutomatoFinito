@@ -20,7 +20,7 @@ public class AutomatoFinitoNaoDeterministico extends AutomatoFinito{
     }
 
     @Override
-    public boolean reconhecerSentenca(List<String> fita) {
+    public boolean reconhecerSentenca(Fita fita) {
         return false;
     }
     

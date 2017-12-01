@@ -6,6 +6,7 @@
 package listener;
 
 import automato.ConverterAfnd;
+import automato.Fita;
 import automato.TabelaAutomato;
 import views.TelaAutomato;
 import views.TelaGramatica;
@@ -46,15 +47,9 @@ public class AutomatoListener implements ActionListener {
     }
 
     public void verificar() {
-        List<String> fita = new ArrayList<>();
-        String sentenca = telaAutomato.getSentenca();
-
-        for (int i = 0; i < sentenca.length(); i++) {
-            fita.add(sentenca.substring(i, i + 1));
-        }
-        
+        String sentenca = telaAutomato.getSentenca();      
         try {
-            boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(fita);
+            boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(new Fita(sentenca));
             verificarSentenca(sentencaReconhecida);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(telaAutomato, "Terminal não existente.");
@@ -81,11 +76,6 @@ public class AutomatoListener implements ActionListener {
        afndParaAfd.getAutomato().getMatrizTransicoes().imprimir();
        telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
     }
-    
-    public void criarNovoEstado(){
-        
-    }
-    
     
     public void getComponent(TelaPrincipal tp) {
         for (Component c : tp.getContentPane().getComponents()) {

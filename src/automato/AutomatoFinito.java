@@ -84,7 +84,7 @@ public abstract class AutomatoFinito {
         return false;
     }
     
-    public abstract boolean reconhecerSentenca(List<String> fita);
+    public abstract boolean reconhecerSentenca(Fita fita);
     
     public boolean temNaoDeterminacao(List<String> producoes, String terminal) {
         return producoes
