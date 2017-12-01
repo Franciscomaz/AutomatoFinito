@@ -21,6 +21,7 @@ public class AutomatoFinitoDeterministico extends AutomatoFinito {
         super(transicoes, estados, terminais, inicial);
     }
 
+    @Override
     public boolean reconhecerSentenca(List<String> fita) {
         String estado = getInicial();
 

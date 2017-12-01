@@ -64,29 +64,28 @@ public class GramaticaListener implements ActionListener {
                 if (producao.length() < 2 && !producao.equals("&")) {
                     excluiEstados.add(k + producao);
                     nTerminais.add("X");
+                    
                 }
             }
         });
         
-        criarEstados(excluiEstados, transicoes);
-        
-        transicoes.forEach((k,v)->{
-            System.out.println(k + ": " + v);
-        });
+        criarEstado(excluiEstados, transicoes);
         
         return new AutomatoFinitoDeterministico(transicoes, nTerminais, gramatica.getTerminais(), gramatica.getInicial());
     }
 
-    public void criarEstados(List<String> excluiEstados, HashMap<String, List<String>> transicoes) {
+    public void criarEstado(List<String> excluiEstados, HashMap<String, List<String>> transicoes) {
+        List<String> estadoNulo = new ArrayList<>();
+        estadoNulo.add("&");
+        transicoes.put("X", estadoNulo);
         for (String terminal : excluiEstados) {
             List<String> aux = new ArrayList(transicoes.get(terminal.substring(0, 1)));
-            List<String> list = new ArrayList<>();
             aux.remove(aux.indexOf(terminal.substring(1)));
             aux.add(terminal.substring(1) + "X");
-            list.add("&");
             transicoes.put(terminal.substring(0,1), aux);
-            transicoes.put("X", list);
         }
     }
+    
+    
 
 }
