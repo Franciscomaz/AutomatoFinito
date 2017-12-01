@@ -52,15 +52,16 @@ public class ConverterAfnd {
             }
         }
     }
-    
-    public void adicionarTransicoesNovoEstado(String novoEstado){
-        for(int i = 0; i < novoEstado.length(); i++){
-            for(String terminais : automato.getTerminais()){
-                automato.getMatrizTransicoes().addTransicao(novoEstado, terminais, novoEstado.substring(i,i+1));
+
+    public void adicionarTransicoesNovoEstado(String novoEstado) {
+        Matriz matriz = automato.getMatrizTransicoes();
+        for (String terminal : automato.getTerminais()) {
+            for (int i = 0; i < novoEstado.length(); i++) {
+                matriz.addTransicao(novoEstado, terminal, matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
             }
         }
     }
-    
+
     public String novoEstado(String[] estados) {
         Set<String> novoEstado = new HashSet<>();
 
