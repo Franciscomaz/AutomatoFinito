@@ -32,8 +32,8 @@ public abstract class AutomatoFinito {
         this.inicial = gramatica.getInicial();
         this.terminais = new ArrayList<>(gramatica.getTerminais());
         this.transicoes = gramatica.getTransicoes();
-        this.matrizTransicoes = new Matriz(this).construirMatriz();
-        //verificarNovoEstado();
+        verificarNovoEstado();
+        this.matrizTransicoes = new Matriz(this).construirMatriz();     
     }
     
     public AutomatoFinito(String inicial, List<String> estados, List<String> terminais, HashMap<String, List<String>> transicoes, Matriz matrizTransicoes) {
@@ -41,8 +41,8 @@ public abstract class AutomatoFinito {
         this.inicial = inicial;
         this.terminais = terminais;
         this.transicoes = transicoes;
-        this.matrizTransicoes = matrizTransicoes;
-        //verificarNovoEstado();
+        verificarNovoEstado();
+        this.matrizTransicoes = matrizTransicoes;     
     }
 
     public HashMap<String, List<String>> getTransicoes() {
@@ -96,19 +96,26 @@ public abstract class AutomatoFinito {
     }
     
     public void verificarNovoEstado() {
+        List<String> transicoesAux = new ArrayList<>();
+        
         transicoes.forEach((k, v) -> {
             for (String producao : v) {
                 if (producao.length() < 2 && !producao.equals("&")) {
-                    adicionarNovoEstado(producao.substring(0, 1)+k);                 
+                    transicoesAux.add(producao.substring(0, 1)+k);                 
                 }
             }
         });
+        if(!transicoesAux.isEmpty())
+            adicionarNovoEstado(transicoesAux); 
     }
 
-    public void adicionarNovoEstado(String transicao) {
-        transicoes.put("X", Arrays.asList("&"));
-        List<String> aux = transicoes.get(transicao.substring(1));
-        aux.set(aux.indexOf(transicao.substring(0, 1)), transicao.substring(0, 1) + "X");
+    public void adicionarNovoEstado(List<String> transicoesAux) {
+        estados.add("X");
+        for(String transicao : transicoesAux){
+            transicoes.put("X", Arrays.asList("&"));
+            List<String> aux = transicoes.get(transicao.substring(1));
+            aux.set(aux.indexOf(transicao.substring(0, 1)), transicao.substring(0, 1) + "X");
+        }
     }
 
     public abstract boolean reconhecerSentenca(Fita fita);
