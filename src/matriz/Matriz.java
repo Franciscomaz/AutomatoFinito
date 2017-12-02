@@ -25,14 +25,11 @@ public class Matriz {
         this.terminais = automato.getTerminais();
         this.estados = automato.getEstados();
         this.transicoes = automato.getTransicoes();
-        this.matriz = new String[estados.size()+100][terminais.size()];
+        this.matriz = new String[estados.size()+10][terminais.size()];
     }
 
     public Matriz construirMatriz() {
-        for (String[] linha : matriz) {
-            Arrays.fill(linha, "");
-        }
-
+        fillMatriz(matriz);
         transicoes.forEach((k, v) -> {
             for (String producao : v) {
                 if (producao.length() > 1) {
@@ -52,51 +49,72 @@ public class Matriz {
 
     public void addTransicao(String estado, String terminal, String estado1) {
         String transicao = matriz[estados.indexOf(estado)][terminais.indexOf(terminal)];
-        
-        if (estado1.equals("")) 
+
+        if (estado1.equals("")) {
             return;
-        
+        }
+
         if ("".equals(transicao)) {
             matriz[estados.indexOf(estado)][terminais.indexOf(terminal)] = estado1;
         } else {
             matriz[estados.indexOf(estado)][terminais.indexOf(terminal)] = transicao + "," + estado1;
         }
-        
+
     }
 
     public void adicionarNovoEstado(String estado) {
-        if (matriz.length == estados.size() - 1) {
-            matriz = Arrays.copyOf(matriz, estados.size() + 10);
+        if (matriz.length - 1 <= estados.size()) {
+            matriz = novaMatriz();
         }
         this.estados.add(estado);
     }
 
     public String getTransicao(String estado, String terminal) {
-        if(estado.equals("") || !terminais.contains(terminal))
+        if (estado.equals("") || !terminais.contains(terminal)) {
             return "";
+        }
         return matriz[estados.indexOf(estado)][terminais.indexOf(terminal)];
     }
 
     public boolean containsEstado(String estado) {
         return this.estados.contains(estado);
     }
-    
-    public boolean excluirEstado(String estado){
+
+    public boolean excluirEstado(String estado) {
         int linha = estados.indexOf(estado);
-        
-        if(linha == -1)
+
+        if (linha == -1) {
             return false;
-        
-        for(int i = linha; i < estados.size(); i++){
-            for(String terminal : terminais){
+        }
+
+        for (int i = linha; i < estados.size(); i++) {
+            for (String terminal : terminais) {
                 int coluna = terminais.indexOf(terminal);
                 matriz[i][coluna] = matriz[i + 1][coluna];
             }
         }
-        
+
         estados.remove(estado);
-        
+
         return true;
+    }
+    
+    private void fillMatriz(String[][] matriz){
+        for(String[] linha : matriz){
+            Arrays.fill(linha, "");
+        }
+    }
+    
+    private String[][] novaMatriz(){
+        String[][] novaMatriz = new String[matriz.length+10][terminais.size()];
+        
+        fillMatriz(novaMatriz);
+        for(int i = 0; i < matriz.length; i++){
+            for(int j = 0; j<terminais.size(); j++){
+                novaMatriz[i][j] = matriz[i][j];
+            }
+        }
+        return novaMatriz;
     }
     
     public void imprimir() {

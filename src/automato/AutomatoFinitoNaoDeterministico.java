@@ -21,11 +21,10 @@ public class AutomatoFinitoNaoDeterministico extends AutomatoFinito{
     
     @Override
     public AutomatoFinitoDeterministico getAutomatoFinitoDeterministico() {
-        converter();
-        return new AutomatoFinitoDeterministico(inicial, estados, terminais, transicoes, matrizTransicoes);
+        return converterParaAfd(); 
     }
 
-    public void converter() {
+    public AutomatoFinitoDeterministico converterParaAfd() {
         int length = estados.size();
         
         for (int i = 0; i < length; i++) {
@@ -43,6 +42,8 @@ public class AutomatoFinitoNaoDeterministico extends AutomatoFinito{
                 }
             }
         }
+        
+        return new AutomatoFinitoDeterministico(inicial, estados, terminais, transicoes, matrizTransicoes);
     }
 
     public void adicionarTransicoesNovoEstado(String novoEstado) {
