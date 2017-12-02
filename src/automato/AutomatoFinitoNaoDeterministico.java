@@ -5,18 +5,15 @@
  */
 package automato;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-
+import gramatica.Gramatica;
 /**
  *
  * @author Francisco
  */
 public class AutomatoFinitoNaoDeterministico extends AutomatoFinito{
 
-    public AutomatoFinitoNaoDeterministico(HashMap<String, List<String>> transicoes, Set<String> estados, Set<String> terminais, String inicial) {
-        super(transicoes, estados, terminais, inicial);
+    public AutomatoFinitoNaoDeterministico(Gramatica gramatica) {
+        super(gramatica);
     }
 
     @Override

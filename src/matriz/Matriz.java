@@ -6,7 +6,6 @@
 package matriz;
 
 import automato.AutomatoFinito;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -18,15 +17,15 @@ import java.util.List;
 public class Matriz {
 
     private final List<String> terminais;
-    private final List<String> nTerminais;
+    private final List<String> estados;
     private final HashMap<String, List<String>> transicoes;
     private String[][] matriz;
 
     public Matriz(AutomatoFinito automato) {
         this.terminais = automato.getTerminais();
-        this.nTerminais = automato.getEstados();
+        this.estados = automato.getEstados();
         this.transicoes = automato.getTransicoes();
-        this.matriz = new String[nTerminais.size()+10][terminais.size()];
+        this.matriz = new String[estados.size()+100][terminais.size()];
     }
 
     public Matriz construirMatriz() {
@@ -48,40 +47,63 @@ public class Matriz {
     }
 
     public void substituirTransicao(String estado, String terminal, String novo) {
-        matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = novo;
+        matriz[estados.indexOf(estado)][terminais.indexOf(terminal)] = novo;
     }
 
     public void addTransicao(String estado, String terminal, String estado1) {
-        String transicao = matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)];
+        String transicao = matriz[estados.indexOf(estado)][terminais.indexOf(terminal)];
+        
         if (estado1.equals("")) 
             return;
+        
         if ("".equals(transicao)) {
-            matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = estado1;
+            matriz[estados.indexOf(estado)][terminais.indexOf(terminal)] = estado1;
         } else {
-            matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)] = transicao + "," + estado1;
+            matriz[estados.indexOf(estado)][terminais.indexOf(terminal)] = transicao + "," + estado1;
         }
+        
     }
 
     public void adicionarNovoEstado(String estado) {
-        if (matriz.length == nTerminais.size() - 1) {
-            matriz = Arrays.copyOf(matriz, nTerminais.size() + 10);
+        if (matriz.length == estados.size() - 1) {
+            matriz = Arrays.copyOf(matriz, estados.size() + 10);
         }
-        nTerminais.add(estado);
+        this.estados.add(estado);
     }
 
     public String getTransicao(String estado, String terminal) {
-        return matriz[nTerminais.indexOf(estado)][terminais.indexOf(terminal)];
+        if(estado.equals(""))
+            return "";
+        return matriz[estados.indexOf(estado)][terminais.indexOf(terminal)];
     }
 
     public boolean containsEstado(String estado) {
-        return nTerminais.contains(estado);
+        return this.estados.contains(estado);
     }
-
+    
+    public boolean excluirEstado(String estado){
+        int linha = estados.indexOf(estado);
+        
+        if(linha == -1)
+            return false;
+        
+        for(int i = linha; i < estados.size(); i++){
+            for(String terminal : terminais){
+                int coluna = terminais.indexOf(terminal);
+                matriz[i][coluna] = matriz[i + 1][coluna];
+            }
+        }
+        
+        estados.remove(estado);
+        
+        return true;
+    }
+    
     public void imprimir() {
-        System.out.println(nTerminais);
-        for (int i = 0; i < nTerminais.size(); i++) {
+        System.out.println(estados);
+        for (int i = 0; i < estados.size(); i++) {
             for (int j = 0; j < terminais.size(); j++) {
-                System.out.println("(" + nTerminais.get(i)
+                System.out.println("(" + estados.get(i)
                         + "," + terminais.get(j) + ")"
                         + "->" + matriz[i][j]);
             }

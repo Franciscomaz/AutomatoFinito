@@ -14,7 +14,7 @@ import java.util.List;
  */
 public final class Fita {
     private final List<String> fita = new ArrayList<>();
-    private int i = -1;
+    private int index = -1;
     
     public Fita(String sentenca) {
         construirFita(sentenca);
@@ -27,8 +27,8 @@ public final class Fita {
     }
     
     public String getProximo(){
-        if(++i == fita.size())
+        if(++index == fita.size())
             return null;
-        return fita.get(i);
+        return fita.get(index);
     }  
 }

@@ -5,6 +5,7 @@
  */
 package views;
 
+import automato.AutomatoFinito;
 import automato.AutomatoFinitoDeterministico;
 import automato.TabelaAutomato;
 import listener.AutomatoListener;
@@ -16,27 +17,25 @@ import listener.AutomatoListener;
 public final class TelaAutomato extends javax.swing.JPanel {
 
     private final AutomatoListener l = new AutomatoListener(this);
-    private final AutomatoFinitoDeterministico automato;
+    private final AutomatoFinito automato;
 
     /**
      * Creates new form TelaAutomato
      *
      * @param automato
      */
-    public TelaAutomato(AutomatoFinitoDeterministico automato) {
+    public TelaAutomato(AutomatoFinito automato) {
         initComponents();
         this.automato = automato;
-        automato.getMatrizTransicoes();
         //transformarAfnd.setVisible(!automato.isNaoDeterministico());
         tabelaAutomato.setModel(new TabelaAutomato(automato));
-        automato.getMatrizTransicoes().imprimir();
     }
     
     public void setModel(TabelaAutomato tabelaModel){
        tabelaAutomato.setModel(tabelaModel);
     }
     
-    public AutomatoFinitoDeterministico getAutomatoFinito(){
+    public AutomatoFinito getAutomatoFinito(){
         return automato;
     }
 

@@ -5,6 +5,7 @@
  */
 package listener;
 
+import automato.AutomatoFinitoDeterministico;
 import automato.ConverterAfnd;
 import automato.Fita;
 import automato.TabelaAutomato;
@@ -14,8 +15,6 @@ import views.TelaPrincipal;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
@@ -35,7 +34,7 @@ public class AutomatoListener implements ActionListener {
     public void actionPerformed(ActionEvent ae) {
         switch (ae.getActionCommand()) {
             case "Verificar":
-                verificar();
+                reconhecerSentenca();
                 break;
             case "TransformarAfnd":
                 TransformarAfnd();
@@ -46,18 +45,18 @@ public class AutomatoListener implements ActionListener {
         }
     }
 
-    public void verificar() {
-        String sentenca = telaAutomato.getSentenca();      
+    public void reconhecerSentenca() {
+        String sentenca = telaAutomato.getSentenca();
         try {
             boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(new Fita(sentenca));
-            verificarSentenca(sentencaReconhecida);
+            isSentencaReconhecida(sentencaReconhecida);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(telaAutomato, "Terminal não existente.");
         }
 
     }
 
-    public void verificarSentenca(boolean sentencaReconhecida) {
+    public void isSentencaReconhecida(boolean sentencaReconhecida) {
         if (sentencaReconhecida) {
             JOptionPane.showMessageDialog(telaAutomato, "Sentença reconhecida.");
         } else {
@@ -70,13 +69,13 @@ public class AutomatoListener implements ActionListener {
         tp.remove(telaAutomato);
         getComponent(tp);
     }
-    
-    public void TransformarAfnd(){
-       ConverterAfnd afndParaAfd = new ConverterAfnd(telaAutomato.getAutomatoFinito());
-       afndParaAfd.getAutomato().getMatrizTransicoes().imprimir();
-       telaAutomato.setModel(new TabelaAutomato(afndParaAfd.getAutomato()));
+
+    public void TransformarAfnd() {
+        ConverterAfnd afndParaAfd = new ConverterAfnd(telaAutomato.getAutomatoFinito());
+        AutomatoFinitoDeterministico automato = afndParaAfd.getAutomato();
+        telaAutomato.setModel(new TabelaAutomato(automato));
     }
-    
+
     public void getComponent(TelaPrincipal tp) {
         for (Component c : tp.getContentPane().getComponents()) {
             if (c instanceof TelaGramatica) {

@@ -5,7 +5,6 @@
  */
 package automato;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -18,15 +17,15 @@ import matriz.Matriz;
  */
 public final class ConverterAfnd {
 
-    private final AutomatoFinitoDeterministico automato;
+    private final AutomatoFinito automato;
 
-    public ConverterAfnd(AutomatoFinitoDeterministico automato) {
+    public ConverterAfnd(AutomatoFinito automato) {
         this.automato = automato;
         converter();
     }
 
     public AutomatoFinitoDeterministico getAutomato() {
-        return automato;
+        return new AutomatoFinitoDeterministico(automato.getInicial(), automato.getEstados(), automato.getTerminais(), automato.getTransicoes(), automato.getMatrizTransicoes());
     }
 
     public void converter() {
@@ -53,10 +52,11 @@ public final class ConverterAfnd {
 
     public void adicionarTransicoesNovoEstado(String novoEstado) {
         Matriz matriz = automato.getMatrizTransicoes();
+   
         for (String terminal : automato.getTerminais()) {
             for (int i = 0; i < novoEstado.length(); i++) {
                 matriz.addTransicao(novoEstado, terminal, matriz.getTransicao(novoEstado.substring(i, i+1), terminal));
-            }
+            }            
         }
     }
 

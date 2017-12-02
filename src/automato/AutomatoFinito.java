@@ -7,6 +7,7 @@ package automato;
 
 import gramatica.Gramatica;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -26,13 +27,22 @@ public abstract class AutomatoFinito {
     protected final List<String> terminais;
     protected final String inicial;
     
-    public AutomatoFinito(HashMap<String, List<String>>transicoes, 
-        Set<String> estados, Set<String> terminais, String inicial) {
-        this.estados = new ArrayList<>(estados);
-        this.inicial = inicial;
-        this.terminais = new ArrayList<>(terminais);
-        this.transicoes = transicoes;
+    public AutomatoFinito(Gramatica gramatica) {
+        this.estados = new ArrayList<>(gramatica.getNaoTerminais());
+        this.inicial = gramatica.getInicial();
+        this.terminais = new ArrayList<>(gramatica.getTerminais());
+        this.transicoes = gramatica.getTransicoes();
         this.matrizTransicoes = new Matriz(this).construirMatriz();
+        //verificarNovoEstado();
+    }
+    
+    public AutomatoFinito(String inicial, List<String> estados, List<String> terminais, HashMap<String, List<String>> transicoes, Matriz matrizTransicoes) {
+        this.estados = estados;
+        this.inicial = inicial;
+        this.terminais = terminais;
+        this.transicoes = transicoes;
+        this.matrizTransicoes = matrizTransicoes;
+        //verificarNovoEstado();
     }
 
     public HashMap<String, List<String>> getTransicoes() {
@@ -71,28 +81,6 @@ public abstract class AutomatoFinito {
         return finais;
     }
 
-    public boolean isNaoDeterministico() {
-        for (Map.Entry<String, List<String>> entry : getTransicoes().entrySet()) {
-            for (String producao : entry.getValue()) {
-                if (producao.length() < 2) {
-                    if (temNaoDeterminacao(entry.getValue(), producao)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
-    
-    public abstract boolean reconhecerSentenca(Fita fita);
-    
-    public boolean temNaoDeterminacao(List<String> producoes, String terminal) {
-        return producoes
-                .stream()
-                .filter(producao -> producao.contains(terminal))
-                .count() > 2;
-    }
-
     public Matriz getMatrizTransicoes() {
         return matrizTransicoes;
     }
@@ -106,5 +94,24 @@ public abstract class AutomatoFinito {
         }
         return false;
     }
+    
+    public void verificarNovoEstado() {
+        transicoes.forEach((k, v) -> {
+            for (String producao : v) {
+                if (producao.length() < 2 && !producao.equals("&")) {
+                    adicionarNovoEstado(producao.substring(0, 1)+k);                 
+                }
+            }
+        });
+    }
 
+    public void adicionarNovoEstado(String transicao) {
+        transicoes.put("X", Arrays.asList("&"));
+        List<String> aux = transicoes.get(transicao.substring(1));
+        aux.set(aux.indexOf(transicao.substring(0, 1)), transicao.substring(0, 1) + "X");
+    }
+    
+    
+    
+    public abstract boolean reconhecerSentenca(Fita fita);
 }
