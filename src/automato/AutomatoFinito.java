@@ -110,8 +110,8 @@ public abstract class AutomatoFinito {
         List<String> aux = transicoes.get(transicao.substring(1));
         aux.set(aux.indexOf(transicao.substring(0, 1)), transicao.substring(0, 1) + "X");
     }
-    
-    
-    
+
     public abstract boolean reconhecerSentenca(Fita fita);
+    
+    public abstract AutomatoFinitoDeterministico getAutomatoFinitoDeterministico();
 }

@@ -53,6 +53,11 @@ public final class AutomatoFinitoDeterministico extends AutomatoFinito {
     }
     
     @Override
+    public AutomatoFinitoDeterministico getAutomatoFinitoDeterministico() {
+        return this;
+    }
+    
+    @Override
     public boolean reconhecerSentenca(Fita fita) {
         String estado = getInicial();
         String caracter;
@@ -65,7 +70,4 @@ public final class AutomatoFinitoDeterministico extends AutomatoFinito {
         }
         return verificaFinal(estado);
     }
-    
-
-
 }

@@ -6,7 +6,7 @@
 package views;
 
 import automato.AutomatoFinito;
-import automato.AutomatoFinitoDeterministico;
+import automato.AutomatoFinitoNaoDeterministico;
 import automato.TabelaAutomato;
 import listener.AutomatoListener;
 
@@ -27,7 +27,7 @@ public final class TelaAutomato extends javax.swing.JPanel {
     public TelaAutomato(AutomatoFinito automato) {
         initComponents();
         this.automato = automato;
-        //transformarAfnd.setVisible(!automato.isNaoDeterministico());
+        transformarAfnd.setVisible(automato instanceof AutomatoFinitoNaoDeterministico);
         tabelaAutomato.setModel(new TabelaAutomato(automato));
     }
     

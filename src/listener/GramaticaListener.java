@@ -5,11 +5,6 @@
  */
 package listener;
 
-import automato.ConverterAfnd;
-import automato.AutomatoFinito;
-import automato.AutomatoFinitoDeterministico;
-import automato.AutomatoFinitoNaoDeterministico;
-import automato.VerificadorDeAfnd;
 import factory.AutomatoFactory;
 import gramatica.Gramatica;
 import views.TelaAutomato;
@@ -17,11 +12,6 @@ import views.TelaGramatica;
 import views.TelaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
 import javax.swing.SwingUtilities;
 
 /**

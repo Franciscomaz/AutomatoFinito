@@ -72,7 +72,7 @@ public class Matriz {
     }
 
     public String getTransicao(String estado, String terminal) {
-        if(estado.equals(""))
+        if(estado.equals("") || !terminais.contains(terminal))
             return "";
         return matriz[estados.indexOf(estado)][terminais.indexOf(terminal)];
     }

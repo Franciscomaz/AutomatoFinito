@@ -5,8 +5,6 @@
  */
 package listener;
 
-import automato.AutomatoFinitoDeterministico;
-import automato.ConverterAfnd;
 import automato.Fita;
 import automato.TabelaAutomato;
 import views.TelaAutomato;
@@ -48,7 +46,10 @@ public class AutomatoListener implements ActionListener {
     public void reconhecerSentenca() {
         String sentenca = telaAutomato.getSentenca();
         try {
-            boolean sentencaReconhecida = telaAutomato.getAutomatoFinito().reconhecerSentenca(new Fita(sentenca));
+            boolean sentencaReconhecida = telaAutomato
+                    .getAutomatoFinito()
+                    .getAutomatoFinitoDeterministico()
+                    .reconhecerSentenca(new Fita(sentenca));
             isSentencaReconhecida(sentencaReconhecida);
         } catch (NullPointerException ex) {
             JOptionPane.showMessageDialog(telaAutomato, "Terminal não existente.");
@@ -71,9 +72,9 @@ public class AutomatoListener implements ActionListener {
     }
 
     public void TransformarAfnd() {
-        ConverterAfnd afndParaAfd = new ConverterAfnd(telaAutomato.getAutomatoFinito());
-        AutomatoFinitoDeterministico automato = afndParaAfd.getAutomato();
-        telaAutomato.setModel(new TabelaAutomato(automato));
+        telaAutomato.setModel(new TabelaAutomato(telaAutomato
+                .getAutomatoFinito()
+                .getAutomatoFinitoDeterministico()));
     }
 
     public void getComponent(TelaPrincipal tp) {
