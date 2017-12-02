@@ -45,16 +45,13 @@ public class AutomatoListener implements ActionListener {
 
     public void reconhecerSentenca() {
         String sentenca = telaAutomato.getSentenca();
-        try {
-            boolean sentencaReconhecida = telaAutomato
-                    .getAutomatoFinito()
-                    .getAutomatoFinitoDeterministico()
-                    .reconhecerSentenca(new Fita(sentenca));
-            isSentencaReconhecida(sentencaReconhecida);
-        } catch (NullPointerException ex) {
-            JOptionPane.showMessageDialog(telaAutomato, "Terminal não existente.");
-        }
-
+        
+        boolean sentencaReconhecida = telaAutomato
+                .getAutomatoFinito()
+                .getAutomatoFinitoDeterministico()
+                .reconhecerSentenca(new Fita(sentenca));
+        
+        isSentencaReconhecida(sentencaReconhecida);
     }
 
     public void isSentencaReconhecida(boolean sentencaReconhecida) {

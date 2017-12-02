@@ -11,7 +11,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 import matriz.Matriz;
 
@@ -95,7 +94,7 @@ public abstract class AutomatoFinito {
         return false;
     }
     
-    public void verificarNovoEstado() {
+    public final void verificarNovoEstado() {
         List<String> transicoesAux = new ArrayList<>();
         
         transicoes.forEach((k, v) -> {
@@ -105,6 +104,7 @@ public abstract class AutomatoFinito {
                 }
             }
         });
+        
         if(!transicoesAux.isEmpty())
             adicionarNovoEstado(transicoesAux); 
     }

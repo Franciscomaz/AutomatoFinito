@@ -12,7 +12,11 @@ import views.TelaGramatica;
 import views.TelaPrincipal;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import utils.AutomatoException;
 
 /**
  *
@@ -39,10 +43,31 @@ public class GramaticaListener implements ActionListener {
         if (telaGramatica.getGramatica() == null) {
             return;
         }
-        
-        Gramatica gramatica = new Gramatica(telaGramatica.getGramatica());
-        TelaPrincipal tp = (TelaPrincipal) SwingUtilities.getWindowAncestor(telaGramatica);
-        telaGramatica.setVisible(false);
-        tp.add(new TelaAutomato(AutomatoFactory.getAutomato(gramatica)));
+
+        try {
+            Gramatica gramatica = new Gramatica(telaGramatica.getGramatica());
+
+            validarGramatica(gramatica);
+
+            TelaPrincipal tp = (TelaPrincipal) SwingUtilities.getWindowAncestor(telaGramatica);
+            telaGramatica.setVisible(false);
+
+            tp.add(new TelaAutomato(AutomatoFactory.getAutomato(gramatica)));
+        } catch (AutomatoException ex) {
+            JOptionPane.showMessageDialog(telaGramatica, ex.getMessage());
+        }
+    }
+
+    public void validarGramatica(Gramatica gramatica) throws AutomatoException {
+        for (Map.Entry<String, List<String>> entry : gramatica.getTransicoes().entrySet()) {
+            for (String producao : entry.getValue()) {
+                if (producao.length() > 1) {
+                    String nTerminal = producao.substring(1);
+                    if (!gramatica.getNaoTerminais().contains(nTerminal)) {
+                        throw new AutomatoException("Não terminal não existente no lado esquerdo da gramática.");
+                    }
+                }
+            }
+        }
     }
 }
