@@ -20,19 +20,19 @@ public final class AutomatoFinitoDeterministico extends AutomatoFinito {
     
     public AutomatoFinitoDeterministico(Gramatica gramatica) {
         super(gramatica);
-        excluirEstadosInuteis();
+        excluirEstadosInalcansaveis();
     }
     
     public AutomatoFinitoDeterministico(String inicial, List<String> estados, List<String> terminais, HashMap<String, List<String>> transicoes, Matriz matrizTransicoes){
         super(inicial, estados, terminais, transicoes, matrizTransicoes);
-        excluirEstadosInuteis();
+        excluirEstadosInalcansaveis();
     }
     
-    public void excluirEstadosInuteis(){
+    public void excluirEstadosInalcansaveis(){
         List<String> estadosUteis = new ArrayList<>();
         List<String> estados = new ArrayList<>(this.estados);
         
-        verificarEstadosInuteis(inicial, estadosUteis);
+        verificarEstadosInalcansaveis(inicial, estadosUteis);
         
         for(String estado : estados){
             if(!estadosUteis.contains(estado))
@@ -40,7 +40,7 @@ public final class AutomatoFinitoDeterministico extends AutomatoFinito {
         }
     }
     
-    public void verificarEstadosInuteis(String estado, List<String> estados) {
+    public void verificarEstadosInalcansaveis(String estado, List<String> estados) {
         if (estados.contains(estado) || estado.equals("")) {
             return;
         }
@@ -48,7 +48,7 @@ public final class AutomatoFinitoDeterministico extends AutomatoFinito {
         estados.add(estado);
 
         for (String terminal : getTerminais()) {
-            verificarEstadosInuteis(getMatrizTransicoes().getTransicao(estado, terminal), estados);
+            verificarEstadosInalcansaveis(getMatrizTransicoes().getTransicao(estado, terminal), estados);
         }
     }
     

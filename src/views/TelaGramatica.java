@@ -48,7 +48,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         gramaticaTextArea.setColumns(20);
         gramaticaTextArea.setRows(5);
-        gramaticaTextArea.setText("S=aA|aC|bB|bC\nA=aF|a\nB=bF|b\nC=aA|aC|bB|bC\nF=aF|bF|a|b");
+        gramaticaTextArea.setText("S=aA|bB\nA=aS|aC|a\nB=bS|bD|b\nC=aB|&\nD=bA|&");
         jScrollPane1.setViewportView(gramaticaTextArea);
         AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));

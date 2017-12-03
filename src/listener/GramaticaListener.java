@@ -63,9 +63,8 @@ public class GramaticaListener implements ActionListener {
             for (String producao : entry.getValue()) {
                 if (producao.length() > 1) {
                     String nTerminal = producao.substring(1);
-                    if (!gramatica.getNaoTerminais().contains(nTerminal)) {
+                    if (!gramatica.getNaoTerminais().contains(nTerminal)) 
                         throw new AutomatoException("Não terminal não existente no lado esquerdo da gramática.");
-                    }
                 }
             }
         }

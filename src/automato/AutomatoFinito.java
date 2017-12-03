@@ -85,7 +85,6 @@ public abstract class AutomatoFinito {
     }
 
     public boolean verificaFinal(String estado) {
-        System.out.println(getFinais());
         for (String s : getFinais()) {
             if (estado.contains(s)) {
                 return true;
@@ -97,10 +96,10 @@ public abstract class AutomatoFinito {
     public final void verificarNovoEstado() {
         List<String> transicoesAux = new ArrayList<>();
         
-        transicoes.forEach((k, v) -> {
+        transicoes.forEach((estado, v) -> {
             for (String producao : v) {
                 if (producao.length() < 2 && !producao.equals("&")) {
-                    transicoesAux.add(producao.substring(0, 1)+k);                 
+                    transicoesAux.add(producao.substring(0, 1)+estado);                 
                 }
             }
         });

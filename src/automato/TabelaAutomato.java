@@ -20,8 +20,8 @@ public class TabelaAutomato extends AbstractTableModel {
 
     public TabelaAutomato(AutomatoFinito automato) {
         this.automato = automato;
-        colunas = new ArrayList<>(automato.getTerminais());
-        colunas.add(0, "Não terminais");
+        this.colunas = new ArrayList<>(automato.getTerminais());
+        this.colunas.add(0, "Não terminais");
     }
 
     @Override
