@@ -3,11 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.views;
-import com.automato.listener.GramaticaListener;
-import com.automato.utils.CustomDocumentFilter;
+package views;
+import utils.AutomatoException;
+import listener.GramaticaListener;
+import utils.CustomDocumentFilter;
 import javax.swing.text.AbstractDocument;
-import static com.automato.utils.GramaticaRegex.GRAMATICA;
+import static utils.GramaticaRegex.GRAMATICA;
 import javax.swing.JOptionPane;
 /**
  *
@@ -47,7 +48,7 @@ public class TelaGramatica extends javax.swing.JPanel {
 
         gramaticaTextArea.setColumns(20);
         gramaticaTextArea.setRows(5);
-        gramaticaTextArea.setText("A=aB|a|bC|b\nB=aD|a|bC|b\nC=aE|a|bC|b\nD=aD|a|bC|b\nE=&");
+        gramaticaTextArea.setText("S=aA|bB\nA=aS|aC|a\nB=bS|bD|b\nC=aB|&\nD=bA|&");
         jScrollPane1.setViewportView(gramaticaTextArea);
         AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();
         document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));
@@ -109,8 +110,6 @@ public class TelaGramatica extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     public String getGramatica(){     
-        limpaGramatica();
-        
         try {
             validaGramatica();
             return gramaticaTextArea.getText();
@@ -124,18 +123,10 @@ public class TelaGramatica extends javax.swing.JPanel {
     public void validaGramatica() throws AutomatoException{
         String gramatica = gramaticaTextArea.getText();
         
-        if(gramatica.equals("")){
-            throw new AutomatoException("Insira uma gramática válida.");
-        }
-    }
-    //para quando tiver so o nao terminal e o "=" em uma linha
-    public void limpaGramatica(){
-        String gramatica = gramaticaTextArea.getText();
-        
         int index = gramatica.lastIndexOf("\n");
         
-        if(gramatica.substring(index+1).length() < 3){
-           gramaticaTextArea.setText(gramatica.substring(0,index+1));
+        if(gramatica.equals("")||gramatica.substring(index+1).length() < 3){
+           throw new AutomatoException("Insira uma gramática válida.");
        }
     }
     

@@ -94,7 +94,7 @@
           <Properties>
             <Property name="columns" type="int" value="20"/>
             <Property name="rows" type="int" value="5"/>
-            <Property name="text" type="java.lang.String" value="A=aB|a|bC|b&#xa;B=aD|a|bC|b&#xa;C=aE|a|bC|b&#xa;D=aD|a|bC|b&#xa;E=&amp;"/>
+            <Property name="text" type="java.lang.String" value="S=aA|bB&#xa;A=aS|aC|a&#xa;B=bS|bD|b&#xa;C=aB|&amp;&#xa;D=bA|&amp;"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_AddingCodePost" type="java.lang.String" value="AbstractDocument document = (AbstractDocument) gramaticaTextArea.getDocument();&#xa;        document.setDocumentFilter(new CustomDocumentFilter(GRAMATICA));"/>

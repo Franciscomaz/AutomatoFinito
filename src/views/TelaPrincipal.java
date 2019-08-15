@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.automato.views;
+package views;
 
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -19,11 +21,11 @@ public final class TelaPrincipal extends javax.swing.JFrame {
      */
     public TelaPrincipal() {
         initComponents();
-        initTelaGramatica();    
+        initTelaGramatica();
     }
-    
-    public void initTelaGramatica(){       
-        this.add(new TelaGramatica());       
+
+    public void initTelaGramatica() {
+        this.add(new TelaGramatica());
         this.pack();
     }
 
@@ -38,8 +40,12 @@ public final class TelaPrincipal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Automato Finito");
+        setAlwaysOnTop(true);
+        setBounds(new java.awt.Rectangle(0, 0, 0, 0));
+        setPreferredSize(new java.awt.Dimension(400, 500));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -81,9 +87,8 @@ public final class TelaPrincipal extends javax.swing.JFrame {
             new TelaPrincipal().setVisible(true); //Create and show the GUI.
         });
     }
-    
-    
-    
+
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     // End of variables declaration//GEN-END:variables
 }

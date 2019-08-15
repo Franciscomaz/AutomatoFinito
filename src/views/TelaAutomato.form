@@ -35,17 +35,18 @@
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-                              <Component id="fieldSentenca" pref="226" max="32767" attributes="0"/>
-                              <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                              <Component id="btnVerificar" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Component id="buttonVoltar" alignment="0" min="-2" pref="85" max="-2" attributes="0"/>
-                      </Group>
+                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                      <Component id="fieldSentenca" pref="234" max="32767" attributes="0"/>
+                      <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnVerificar" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="buttonVoltar" min="-2" pref="85" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="transformarAfnd" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -62,13 +63,16 @@
                   </Group>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="fieldSentenca" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVerificar" alignment="3" min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btnVerificar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-              <Component id="jScrollPane1" pref="394" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="415" max="32767" attributes="0"/>
               <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
-              <Component id="buttonVoltar" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="buttonVoltar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="transformarAfnd" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -117,6 +121,15 @@
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonVoltar.addActionListener(l);"/>
+      </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="transformarAfnd">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Mostrar Afd"/>
+        <Property name="actionCommand" type="java.lang.String" value="TransformarAfnd"/>
+      </Properties>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="transformarAfnd.addActionListener(l);"/>
       </AuxValues>
     </Component>
   </SubComponents>
