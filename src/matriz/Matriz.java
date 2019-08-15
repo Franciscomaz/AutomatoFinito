@@ -116,15 +116,4 @@ public class Matriz {
         }
         return novaMatriz;
     }
-    
-    public void imprimir() {
-        System.out.println(estados);
-        for (int i = 0; i < estados.size(); i++) {
-            for (int j = 0; j < terminais.size(); j++) {
-                System.out.println("(" + estados.get(i)
-                        + "," + terminais.get(j) + ")"
-                        + "->" + matriz[i][j]);
-            }
-        }
-    }
 }
